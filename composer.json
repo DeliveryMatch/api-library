@@ -1,0 +1,19 @@
+{
+    "name": "deliverymatch/api-library",
+    "type": "library",
+    "authors": [
+        {
+            "name": "deliverymatch",
+            "email": "info@deliverymatch.nl"
+        }
+    ],
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DeliveryMatchApiLibrary\\": "src/"
+        }
+    }
+}
