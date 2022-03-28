@@ -11,6 +11,9 @@
         "ext-curl": "*",
         "ext-json": "*"
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "autoload": {
         "psr-4": {
             "DeliveryMatchApiLibrary\\": "src/"
