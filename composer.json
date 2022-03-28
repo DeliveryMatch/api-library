@@ -1,6 +1,7 @@
 {
     "name": "deliverymatch/api-library",
     "type": "library",
+    "license": "GNU GPLv3",
     "authors": [
         {
             "name": "deliverymatch",
