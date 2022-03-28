@@ -6,9 +6,9 @@ use Exception;
 
 class DeliveryMatchException extends Exception
 {
-    public function __construct($message, $code)
+    public function __construct($message, $code, $status)
     {
-        parent::__construct($message, $code);
+        parent::__construct("$status: $message", $code);
     }
 
     public function __toString()

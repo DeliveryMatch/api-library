@@ -30,7 +30,7 @@ class DeliveryMatchClient
      * @throws DeliveryMatchException
      */
     public function sendRequest(string $method, $data) {
-        return $this->sendRequest($method, $data);
+        return $this->connectApi($method, $data);
     }
 
     /**
@@ -67,7 +67,7 @@ class DeliveryMatchClient
 
 
         if (isset($result->status) && $result->status !== "success") {
-            throw new DeliveryMatchException($result->message, $result->code);
+            throw new DeliveryMatchException($result->message, $result->code, $result->status);
         }
 
         if (!$result) {
