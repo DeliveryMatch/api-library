@@ -1,6 +1,8 @@
 {
     "name": "deliverymatch/api-library",
     "type": "library",
+    "license": "GPL-3.0-or-later",
+    "description": "PHP library to communicate with the DeliveryMatch API",
     "authors": [
         {
             "name": "deliverymatch",
@@ -11,9 +13,15 @@
         "ext-curl": "*",
         "ext-json": "*"
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "autoload": {
         "psr-4": {
             "DeliveryMatchApiLibrary\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }

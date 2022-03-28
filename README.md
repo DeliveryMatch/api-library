@@ -22,7 +22,7 @@ $requestData = [
     "shipment" => [
         "id" => 123456789
     ] 
-]
+];
 
-$shipment = $api->sendRequest("getShipment", $requestData)
+$shipment = $api->sendRequest("getShipment", $requestData);
 ```

@@ -3,6 +3,8 @@
 namespace DeliveryMatchApiLibrary;
 
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
+use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
+use Exception;
 
 class DeliveryMatchClient
 {
@@ -30,7 +32,7 @@ class DeliveryMatchClient
      * @throws DeliveryMatchException
      */
     public function sendRequest(string $method, $data) {
-        return $this->sendRequest($method, $data);
+        return $this->connectApi($method, $data);
     }
 
     /**
@@ -40,6 +42,7 @@ class DeliveryMatchClient
      * @return mixed|string
      *
      * @throws DeliveryMatchException
+     * @throws Exception
      */
     private function connectApi(string $method,  $data)
     {
@@ -63,16 +66,21 @@ class DeliveryMatchClient
 
         $response = curl_exec($ch);
 
+        if (!$response) {
+            throw new Exception(curl_error($ch), curl_errno($ch));
+        }
+
         $result = json_decode($response);
 
-
         if (isset($result->status) && $result->status !== "success") {
-            throw new DeliveryMatchException($result->message, $result->code);
+            throw new DeliveryMatchException($result->message, $result->code, $result->status);
         }
 
-        if (!$result) {
-            return curl_error($ch) . curl_errno($ch);
+        if (!isset($result->status) && !isset($result->code)) {
+            throw new InvalidDeliveryMatchLinkException($this->url);
         }
+
+
 
         curl_close($ch);
 
