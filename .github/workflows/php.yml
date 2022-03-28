@@ -27,6 +27,6 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-
-     - name: Run unit tests
-       run: CLIENT_ID=${{secrets.CLIENT_ID}} URL=${{secrets.URL}} API_KEY=${{secrets.API_KEY}} composer run-script test
+        
+      - name: Run unit tests
+        run: CLIENT_ID=${{secrets.CLIENT_ID}} URL=${{secrets.URL}} API_KEY=${{secrets.API_KEY}} composer run-script test
