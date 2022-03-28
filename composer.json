@@ -2,6 +2,7 @@
     "name": "deliverymatch/api-library",
     "type": "library",
     "license": "GPL-3.0-or-later",
+    "description": "PHP library to communicate with the DeliveryMatch API",
     "authors": [
         {
             "name": "deliverymatch",
