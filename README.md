@@ -2,7 +2,12 @@
 
 The DeliveryMatch API library provides an easy way to connect with our API.
 
-## Table of contents
+## Table of contents:
+* [Table of contents](#table-of-contents)
+* [Installation:](#installation)
+  + [1. Composer](#1-composer)
+  + [2. Download source](#2-download-source)
+* [How to use:](#how-to-use)
 
 ## Installation:
 
