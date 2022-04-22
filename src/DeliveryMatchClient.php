@@ -2,6 +2,7 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DeliveryMatchApiLibrary\dto\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
@@ -33,6 +34,10 @@ class DeliveryMatchClient
      */
     public function sendRequest(string $method, $data) {
         return $this->connectApi($method, $data);
+    }
+
+    public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
+        return $this->connectApi("insertShipment", $insertShipmentRequest);
     }
 
     /**
