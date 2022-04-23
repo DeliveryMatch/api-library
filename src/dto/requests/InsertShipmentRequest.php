@@ -1,6 +1,13 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto;
+namespace DeliveryMatchApiLibrary\dto\requests;
+
+use DeliveryMatchApiLibrary\dto\general\Client;
+use DeliveryMatchApiLibrary\dto\general\Customer;
+use DeliveryMatchApiLibrary\dto\general\Packages;
+use DeliveryMatchApiLibrary\dto\general\Quote;
+use DeliveryMatchApiLibrary\dto\general\Sender;
+use DeliveryMatchApiLibrary\dto\general\Shipment;
 
 class InsertShipmentRequest
 {

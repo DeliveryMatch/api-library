@@ -1,7 +1,8 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto;
+namespace DeliveryMatchApiLibrary\dto\general;
 use DateTime;
+use DeliveryMatchApiLibrary\dto\Date;
 
 class Shipment
 {

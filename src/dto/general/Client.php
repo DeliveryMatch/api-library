@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto;
+namespace DeliveryMatchApiLibrary\dto\general;
 
 class Client
 {
