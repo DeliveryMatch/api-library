@@ -85,12 +85,8 @@ class DeliveryMatchClient
             throw new InvalidDeliveryMatchLinkException($this->url);
         }
 
-
-
         curl_close($ch);
 
         return $result;
     }
-
-
 }

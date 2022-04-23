@@ -1,6 +1,15 @@
 <?php
 
 use DeliveryMatchApiLibrary\DeliveryMatchClient;
+use DeliveryMatchApiLibrary\dto\Action;
+use DeliveryMatchApiLibrary\dto\Address;
+use DeliveryMatchApiLibrary\dto\Client;
+use DeliveryMatchApiLibrary\dto\Customer;
+use DeliveryMatchApiLibrary\dto\InsertShipmentRequest;
+use DeliveryMatchApiLibrary\dto\Method;
+use DeliveryMatchApiLibrary\dto\Product;
+use DeliveryMatchApiLibrary\dto\Quote;
+use DeliveryMatchApiLibrary\dto\Shipment;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use PHPUnit\Framework\TestCase;
@@ -60,8 +69,54 @@ class DeliveryMatchClientTest extends TestCase
         } catch (DeliveryMatchException $e) {
             $this->fail("Method should not throw exception");
         }
-
     }
 
+    public function test_insert_shipment_should_give_valid_response() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new InsertShipmentRequest(
+            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
+            new Shipment("test_123", "test_123_r", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
+            null,
+            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "Netherlands", null, null), null, null),
+            null,
+            new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
+            )]),
+            null,
+            null,
+            40,
+            null,
+            15
+        );
+
+        $res = $api->insertShipment($shipment);
+        $this->assertEquals("success", $res->status);
+        $this->assertEquals(150, $res->code);
+        $this->assertEquals("Successful API connection", $res->message);
+    }
+
+    /**
+     * @throws DeliveryMatchException
+     */
+    public function test_insert_shipment_should_throw_exception_shipment_weight_missing() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new InsertShipmentRequest(
+            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
+            new Shipment("test_123", "test_123_r", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
+            null,
+            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "Netherlands", null, null), null, null),
+            null,
+            new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
+            )]),
+            null,
+            null,
+            40,
+            null,
+            0
+        );
+
+        $this->expectExceptionMessage("Shipment could not be stored: shipment weight missing");
+
+        $res = $api->insertShipment($shipment);
+    }
 
 }

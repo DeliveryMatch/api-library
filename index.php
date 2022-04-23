@@ -7,7 +7,7 @@ use DeliveryMatchApiLibrary\dto\Client;
 use DeliveryMatchApiLibrary\dto\Customer;
 use DeliveryMatchApiLibrary\dto\Address;
 use DeliveryMatchApiLibrary\dto\InsertShipmentRequest;
-use DeliveryMatchApiLibrary\dto\Packages;
+use DeliveryMatchApiLibrary\dto\Package;
 use DeliveryMatchApiLibrary\dto\Product;
 use DeliveryMatchApiLibrary\dto\Quote;
 use DeliveryMatchApiLibrary\dto\Sender;
@@ -23,7 +23,7 @@ $shipment = new InsertShipmentRequest(
     null,
     new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "Netherlands", null, null), null, null),
     null,
-    new Quote(new Product(
+    new Quote([new Product(
         "123",
         null,
         null,
@@ -47,7 +47,7 @@ $shipment = new InsertShipmentRequest(
         null,
         null,
         null,
-    )),
+    )]),
     null,
     null,
     40,

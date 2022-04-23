@@ -8,7 +8,7 @@ class InsertShipmentRequest
     private Shipment $shipment;
     private ?Sender $sender;
     private Customer $customer;
-    private ?Packages $packages;
+    private ?Package $packages;
     private Quote $quote;
     private ?bool $fragileGoods;
     private ?bool $dangerousGoods;
@@ -21,7 +21,7 @@ class InsertShipmentRequest
      * @param Shipment $shipment
      * @param Sender|null $sender
      * @param Customer $customer
-     * @param Packages|null $packages
+     * @param Package|null $packages
      * @param Quote $quote
      * @param bool|null $fragileGoods
      * @param bool|null $dangerousGoods
@@ -29,7 +29,7 @@ class InsertShipmentRequest
      * @param float|null $priceExcl
      * @param float $weight
      */
-    public function __construct(Client $client, Shipment $shipment, ?Sender $sender, Customer $customer, ?Packages $packages, Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, float $priceIncl, ?float $priceExcl, float $weight)
+    public function __construct(Client $client, Shipment $shipment, ?Sender $sender, Customer $customer, ?Package $packages, Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, float $priceIncl, ?float $priceExcl, float $weight)
     {
         $this->client = $client;
         $this->shipment = $shipment;

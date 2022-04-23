@@ -4,12 +4,13 @@ namespace DeliveryMatchApiLibrary\dto;
 
 class Quote
 {
-    private Product $product;
+    /** @var Product[] */
+    private array $product;
 
     /**
-     * @param Product $product
+     * @param Product[] $product
      */
-    public function __construct(Product $product)
+    public function __construct(array $product)
     {
         $this->product = $product;
     }
