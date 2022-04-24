@@ -11,8 +11,10 @@ $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SER
 
 $shipment = new UpdateShipmentRequest(null, new ShipmentUpdate("123", Status::DRA, null, null, null, null, null), null, null);
 
-try {
-    $api->sendRequest("me", [""]);
-} catch (Exception $e) {
-    print_r($e);
-}
+print_r($shipment);
+
+//try {
+//    $api->sendRequest("me", [""]);
+//} catch (Exception $e) {
+//    print_r($e);
+//}
