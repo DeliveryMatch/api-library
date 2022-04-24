@@ -7,7 +7,7 @@
         <env name="URL" value="https://www.deliverymatch.nl/engine/live/deliverymatch/api/v0.1" />
       </envs>
     </CommandLine>
-    <TestRunner class="DeliveryMatchClientTest" directory="$PROJECT_DIR$/tests" file="$PROJECT_DIR$/tests/DeliveryMatchClientTest.php" />
+    <TestRunner class="DeliveryMatchClientTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/tests" file="$PROJECT_DIR$/tests/DeliveryMatchClientTest.php" />
     <method v="2" />
   </configuration>
 </component>
