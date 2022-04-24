@@ -52,10 +52,12 @@ $shipment = new InsertShipmentRequest(
     null,
     40,
     null,
-    10);
+    10, );
 
-try {
-    $api->sendRequest("me", [""]);
-} catch (Exception $e) {
-    print_r($e);
-}
+print_r($shipment);
+
+//try {
+//    $api->sendRequest("me", [""]);
+//} catch (Exception $e) {
+//    print_r($e);
+//}

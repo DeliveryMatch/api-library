@@ -93,30 +93,4 @@ class DeliveryMatchClientTest extends TestCase
         $this->assertEquals(150, $res->code);
         $this->assertEquals("Successful API connection", $res->message);
     }
-
-    /**
-     * @throws DeliveryMatchException
-     */
-    public function test_insert_shipment_should_throw_exception_shipment_weight_missing() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new InsertShipmentRequest(
-            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
-            new Shipment("test_123", "test_123_r", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
-            null,
-            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "Netherlands", null, null), null, null),
-            null,
-            new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
-            )]),
-            null,
-            null,
-            40,
-            null,
-            0
-        );
-
-        $this->expectExceptionMessage("Shipment could not be stored: shipment weight missing");
-
-        $res = $api->insertShipment($shipment);
-    }
-
 }
