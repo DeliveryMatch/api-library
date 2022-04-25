@@ -2,6 +2,8 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
@@ -39,20 +41,52 @@ class DeliveryMatchClient
         return $this->connectApi($method, $data);
     }
 
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
         return $this->connectApi("insertShipment", $insertShipmentRequest);
     }
 
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
     public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest) {
         return $this->connectApi("insertShipments", $insertShipmentsRequest);
     }
 
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
     public function updateShipment(UpdateShipmentRequest $updateShipmentRequest) {
         return $this->connectApi("updateShipment", $updateShipmentRequest);
     }
 
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
     public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest) {
         return $this->connectApi("updateShipments", $updateShipmentsRequest);
+    }
+
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
+    public function getShipment(getShipmentRequest $getShipmentRequest) {
+        return $this->connectApi("getShipment", $getShipmentRequest);
+    }
+
+    /**
+     * @return mixed
+     * @throws DeliveryMatchException
+     */
+    public function getShipments(getShipmentsRequest $getShipmentsRequest) {
+        return $this->connectApi("getShipments", $getShipmentsRequest);
     }
 
     /**
@@ -69,6 +103,12 @@ class DeliveryMatchClient
 
         $ch = curl_init();
         $url = "$this->url/$method";
+
+        echo "endpoint: ";
+        print_r($url);
+        echo "   ";
+        echo "data: ";
+        print_r(json_encode($data));
 
         curl_setopt_array($ch, array(
             CURLOPT_URL => $url,
@@ -91,6 +131,8 @@ class DeliveryMatchClient
         }
 
         $result = json_decode($response);
+
+        print_r($result);
 
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);
