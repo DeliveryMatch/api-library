@@ -103,6 +103,4 @@ class DeliveryMatchClient
 
         return $result;
     }
-
-
 }
