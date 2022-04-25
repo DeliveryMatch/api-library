@@ -1,15 +1,18 @@
 <?php
 
 use DeliveryMatchApiLibrary\DeliveryMatchClient;
+use DeliveryMatchApiLibrary\dto\general\Action;
 use DeliveryMatchApiLibrary\dto\general\Address;
 use DeliveryMatchApiLibrary\dto\general\Client;
 use DeliveryMatchApiLibrary\dto\general\Customer;
+use DeliveryMatchApiLibrary\dto\general\Method;
 use DeliveryMatchApiLibrary\dto\general\Product;
 use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
 use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
 use DeliveryMatchApiLibrary\dto\general\updates\Status;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
@@ -159,7 +162,7 @@ class DeliveryMatchClientTest extends TestCase
     public function test_update_shipment_should_throw_exception() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new UpdateShipmentRequest(
-            null,
+            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
             new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
             null,
             null
@@ -171,11 +174,14 @@ class DeliveryMatchClientTest extends TestCase
         $api->updateShipment($shipment);
     }
 
+    /**
+     * @throws DeliveryMatchException
+     */
     public function test_update_shipmentS_should_throw_exception() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new UpdateShipmentsRequest([
-            new UpdateShipmentRequest(null, new ShipmentUpdate("123", Status::DRAFT, null, null, null, null, null), null, null),
-            new UpdateShipmentRequest(null, new ShipmentUpdate("1234", Status::DRAFT, null, null, null, null, null), null, null)
+            new UpdateShipmentRequest(new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null), new ShipmentUpdate("123", Status::DRAFT, null, null, null, null, null), null, null),
+            new UpdateShipmentRequest(new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null), new ShipmentUpdate("1234", Status::DRAFT, null, null, null, null, null), null, null)
         ]);
 
         $this->expectException(DeliveryMatchException::class);

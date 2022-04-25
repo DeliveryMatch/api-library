@@ -20,7 +20,7 @@ class UpdateShipmentRequest
      * @param Sender|null $sender
      * @param Customer|null $customer
      */
-    public function __construct(?Client $client, ShipmentUpdate $shipment, ?Sender $sender, ?Customer $customer)
+    public function __construct(Client $client, ShipmentUpdate $shipment, ?Sender $sender, ?Customer $customer)
     {
         $this->client = $client;
         $this->shipment = $shipment;

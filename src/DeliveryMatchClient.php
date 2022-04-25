@@ -3,6 +3,7 @@
 namespace DeliveryMatchApiLibrary;
 
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
