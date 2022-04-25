@@ -41,7 +41,7 @@ $shipment = new GetShipmentsRequest(array('dateFrom' => "2022-02-20", 'dateTo' =
 print_r($shipment);
 
 try {
-    $res = $api->getShipment($shipment);
+    $res = $api->getShipments($shipment);
 //    $res = $api->updateShipment($shipment);
 } catch (\DeliveryMatchApiLibrary\exceptions\DeliveryMatchException $e) {}
 
