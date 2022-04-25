@@ -26,9 +26,9 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     protected ?float $priceExcl;
     protected ?float $weight;
 
-    public function __construct(array $insertshipment)
+    public function __construct(array $updateshipment)
     {
-        parent::__construct($insertshipment);
+        parent::__construct($updateshipment);
     }
 
 

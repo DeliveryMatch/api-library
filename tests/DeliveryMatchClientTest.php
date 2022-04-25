@@ -11,6 +11,7 @@ use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
 use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
 use DeliveryMatchApiLibrary\dto\general\updates\Status;
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
@@ -156,38 +157,61 @@ class DeliveryMatchClientTest extends TestCase
 //        $this->assertEquals("Successful API connection", $res->message);
 //    }
 
+//    /**
+//     * @throws DeliveryMatchException
+//     */
+//    public function test_update_shipment_should_throw_exception() {
+//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+//        $shipment = new UpdateShipmentRequest(array(
+//                new Client(66, "API", null, Action::BOOK, Method::FIRST, null, null),
+//                new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null
+//            )
+//        );
+//
+//        $this->expectException(DeliveryMatchException::class);
+//        $this->expectExceptionMessage("failure: No shipment ID found");
+//        $this->expectExceptionCode(31);
+//
+//        $api->updateShipment($shipment);
+//    }
+
+//    /**
+//     * @throws DeliveryMatchException
+//     */
+//    public function test_update_shipmentS_should_throw_exception() {
+//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+//        $shipment = new UpdateShipmentsRequest(
+//            array(
+//                new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null), new ShipmentUpdate("123", Status::DRAFT, null, null, null, null, null), null, null)
+//            );
+//
+//        $this->expectException(DeliveryMatchException::class);
+//        $this->expectExceptionMessage("failure: Could not find shipment ID");
+//        $this->expectExceptionCode(961);
+//
+//        $api->updateShipments($shipment);
+//    }
+
     /**
      * @throws DeliveryMatchException
      */
-    public function test_update_shipment_should_throw_exception() {
+    public function test_get_shipment_should_throw_exception() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new UpdateShipmentRequest(
-            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
-            new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
-            null,
-            null
-        );
-        $this->expectException(DeliveryMatchException::class);
-        $this->expectExceptionMessage("failure: No shipment ID found");
-        $this->expectExceptionCode(31);
-
-        $api->updateShipment($shipment);
-    }
-
-    /**
-     * @throws DeliveryMatchException
-     */
-    public function test_update_shipmentS_should_throw_exception() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new UpdateShipmentsRequest([
-            new UpdateShipmentRequest(new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null), new ShipmentUpdate("123", Status::DRAFT, null, null, null, null, null), null, null),
-            new UpdateShipmentRequest(new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null), new ShipmentUpdate("1234", Status::DRAFT, null, null, null, null, null), null, null)
-        ]);
+        $shipment = new GetShipmentRequest(array('id' => 123, 'orderNumber' => 'TUIN1000400374'));
 
         $this->expectException(DeliveryMatchException::class);
-        $this->expectExceptionMessage("failure: Could not find shipment ID");
-        $this->expectExceptionCode(961);
+        $this->expectExceptionMessage("failure: Shipment not found");
+        $this->expectExceptionCode(32);
 
-        $api->updateShipments($shipment);
+        $api->getShipment($shipment);
     }
 }
