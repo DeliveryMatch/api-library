@@ -8,46 +8,157 @@ use DeliveryMatchApiLibrary\dto\general\Packages;
 use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Sender;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
+use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
+use JetBrains\PhpStorm\ArrayShape;
 
 class InsertShipmentRequest
 {
-    private Client $client;
-    private Shipment $shipment;
-    private ?Sender $sender;
-    private Customer $customer;
-    private ?Package $packages;
-    private Quote $quote;
-    private ?bool $fragileGoods;
-    private ?bool $dangerousGoods;
-    private float $priceIncl;
-    private ?float $priceExcl;
-    private float $weight;
+    protected Client $client;
+    protected Shipment|ShipmentUpdate $shipment;
+    protected ?Sender $sender;
+    protected ?Customer $customer;
+    protected ?Packages $packages;
+    protected ?Quote $quote;
+    protected ?bool $fragileGoods;
+    protected ?bool $dangerousGoods;
+    protected ?float $priceIncl;
+    protected ?float $priceExcl;
+    protected ?float $weight;
 
     /**
-     * @param Client $client
-     * @param Shipment $shipment
-     * @param Sender|null $sender
-     * @param Customer $customer
-     * @param Package|null $packages
-     * @param Quote $quote
-     * @param bool|null $fragileGoods
-     * @param bool|null $dangerousGoods
-     * @param float $priceIncl
-     * @param float|null $priceExcl
-     * @param float $weight
+     * @param array $insertshipment
      */
-    public function __construct(Client $client, Shipment $shipment, ?Sender $sender, Customer $customer, ?Package $packages, Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, float $priceIncl, ?float $priceExcl, float $weight)
+    public function __construct(array $insertshipment)
     {
-        $this->client = $client;
-        $this->shipment = $shipment;
-        $this->sender = $sender;
-        $this->customer = $customer;
-        $this->packages = $packages;
-        $this->quote = $quote;
-        $this->fragileGoods = $fragileGoods;
-        $this->dangerousGoods = $dangerousGoods;
-        $this->priceIncl = $priceIncl;
-        $this->priceExcl = $priceExcl;
-        $this->weight = $weight;
+        $this->client = $insertshipment['client'];
+        $this->shipment = $insertshipment['shipment'];
+        $this->sender = $insertshipment['sender'];
+        $this->customer = $insertshipment['customer'];
+        $this->packages = $insertshipment['packages'];
+        $this->quote = $insertshipment['quote'];
+        $this->fragileGoods = $insertshipment['fragileGoods'];
+        $this->dangerousGoods = $insertshipment['dangerousGoods'];
+        $this->priceIncl = $insertshipment['priceIncl'];
+        $this->priceExcl = $insertshipment['priceExcl'];
+        $this->weight = $insertshipment['weight'];
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
+    /**
+     * @return Shipment
+     */
+    public function getShipment(): Shipment
+    {
+        return $this->shipment;
+    }
+
+    /**
+     * @return Sender|null
+     */
+    public function getSender(): Sender|null
+    {
+        return $this->sender;
+    }
+
+    /**
+     * @return Customer
+     */
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @return Packages|null
+     */
+    public function getPackages(): Packages|null
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @return Quote
+     */
+    public function getQuote(): Quote
+    {
+        return $this->quote;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getFragileGoods(): bool|null
+    {
+        return $this->fragileGoods;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDangerousGoods(): bool|null
+    {
+        return $this->dangerousGoods;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPriceIncl(): float
+    {
+        return $this->priceIncl;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPriceExcl(): float|null
+    {
+        return $this->priceExcl;
+    }
+
+    /**
+     * @return float
+     */
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @return array
+     */
+    #[ArrayShape(['client' => "Client",
+        'shipment' => "Shipment",
+        'sender' => "Sender|null",
+        'customer' => "Customer",
+        'packages' => "Packages|null",
+        'quote' => "Quote",
+        'fragileGoods' => "bool|null",
+        'dangerousGoods' => "bool|null",
+        'princeIncl' => "float",
+        'priceExcl' => "float|null",
+        'weight' => "float"])]
+    public function jsonSerialize(): array
+    {
+        return [
+            'client'   => $this->getClient(),
+            'shipment' => $this->getShipment(),
+            'sender' => $this->getSender(),
+            'customer' => $this->getCustomer(),
+            'packages' => $this->getPackages(),
+            'quote' => $this->getQuote(),
+            'fragileGoods' => $this->getFragileGoods(),
+            'dangerousGoods' => $this->getDangerousGoods(),
+            'princeIncl' => $this->getPriceIncl(),
+            'priceExcl' => $this->getPriceExcl(),
+            'weight' => $this->getWeight(),
+        ];
     }
 }

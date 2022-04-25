@@ -2,6 +2,8 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\updates;
 
+use DeliveryMatchApiLibrary\dto\general\Shipment;
+
 class ShipmentUpdate
 {
     private int $id;
