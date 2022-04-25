@@ -9,7 +9,7 @@ use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
 
 class UpdateShipmentRequest
 {
-    private ?Client $client;
+    private Client $client;
     private ShipmentUpdate $shipment;
     private ?Sender $sender;
     private ?Customer $customer;
