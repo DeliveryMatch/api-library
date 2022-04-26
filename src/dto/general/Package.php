@@ -2,15 +2,15 @@
 
 namespace DeliveryMatchApiLibrary\dto\general;
 
-class Package
+class Package implements \JsonSerializable
 {
-    private ?string $warehouse;
-    private string $description;
-    private ?string $type;
-    private float $weight;
-    private float $length;
-    private float $width;
-    private float $height;
+    protected ?string $warehouse;
+    protected string $description;
+    protected ?string $type;
+    protected float $weight;
+    protected float $length;
+    protected float $width;
+    protected float $height;
 
     /**
      * @param string|null $warehouse
@@ -30,5 +30,61 @@ class Package
         $this->length = $length;
         $this->width = $width;
         $this->height = $height;
+    }
+
+    /** @return string|null */
+    public function getWarehouse(): ?string
+    {
+        return $this->warehouse;
+    }
+
+    /** @return string */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /** @return string|null */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /** @return float */
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    /** @return float */
+    public function getLength(): float
+    {
+        return $this->length;
+    }
+
+    /** @return float */
+    public function getWidth(): float
+    {
+        return $this->width;
+    }
+
+    /** @return float */
+    public function getHeight(): float
+    {
+        return $this->height;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+            'warehouse' => $this->getWarehouse(),
+            'description' => $this->getDescription(),
+            'type' => $this->getType(),
+            'weight' => $this->getWeight(),
+            'length' => $this->getLength(),
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
+        ];
     }
 }

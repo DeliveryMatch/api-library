@@ -2,15 +2,15 @@
 
 namespace DeliveryMatchApiLibrary\dto\general;
 
-class Client
+class Client implements \JsonSerializable
 {
-    private int $id;
-    private ?string $channel;
-    private ?string $callback;
-    private string $action;
-    private ?string $method;
-    private ?bool $filter;
-    private ?bool $transportlabel;
+    protected int $id;
+    protected ?string $channel;
+    protected ?string $callback;
+    protected string $action;
+    protected ?string $method;
+    protected ?bool $filter;
+    protected ?bool $transportlabel;
 
     /**
      * @param int $id
@@ -30,5 +30,61 @@ class Client
         $this->method = $method;
         $this->filter = $filter;
         $this->transportlabel = $transportlabel;
+    }
+
+    /** @return int */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /** @return string|null */
+    public function getChannel(): ?string
+    {
+        return $this->channel;
+    }
+
+    /** @return string|null */
+    public function getCallback(): ?string
+    {
+        return $this->callback;
+    }
+
+    /** @return string */
+    public function getAction(): string
+    {
+        return $this->action;
+    }
+
+    /** @return string|null */
+    public function getMethod(): ?string
+    {
+        return $this->method;
+    }
+
+    /** @return bool|null */
+    public function getFilter(): ?bool
+    {
+        return $this->filter;
+    }
+
+    /** @return bool|null */
+    public function getTransportlabel(): ?bool
+    {
+        return $this->transportlabel;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id'   => $this->getId(),
+            'channel' => $this->getChannel(),
+            'callback' => $this->getCallback(),
+            'action' => $this->getAction(),
+            'method' => $this->getMethod(),
+            'filter' => $this->getFilter(),
+            'transportlabel' => $this->getTransportlabel()
+        ];
     }
 }

@@ -3,31 +3,31 @@
 namespace DeliveryMatchApiLibrary\dto\general;
 use DateTime;
 
-class Product
+class Product implements \JsonSerializable
 {
-    private ?string $id;
-    private ?int $packageNum;
-    private ?int $warehouse;
-    private ?bool $transportlabel;
-    private ?string $location;
-    private ?string $description;
-    private ?string $content;
-    private ?string $SKU;
-    private ?string $hsCode;
-    private ?DangerousGoods $dangerousGoods;
-    private float $quantity;
-    private float $value;
-    private float $weight;
-    private float $length;
-    private float $width;
-    private ?bool $stock;
-    private ?DateTime $stockdate;
-    private ?WareHouse $warehouses;
-    private ?string $custom1;
-    private ?string $custom2;
-    private ?string $custom3;
-    private ?string $custom4;
-    private ?string $custom5;
+    protected ?string $id;
+    protected ?int $packageNum;
+    protected ?int $warehouse;
+    protected ?bool $transportlabel;
+    protected ?string $location;
+    protected ?string $description;
+    protected ?string $content;
+    protected ?string $SKU;
+    protected ?string $hsCode;
+    protected ?DangerousGoods $dangerousGoods;
+    protected float $quantity;
+    protected float $value;
+    protected float $weight;
+    protected float $length;
+    protected float $width;
+    protected ?bool $stock;
+    protected ?DateTime $stockdate;
+    protected ?WareHouse $warehouses;
+    protected ?string $custom1;
+    protected ?string $custom2;
+    protected ?string $custom3;
+    protected ?string $custom4;
+    protected ?string $custom5;
 
     /**
      * @param string|null $id
@@ -79,5 +79,173 @@ class Product
         $this->custom3 = $custom3;
         $this->custom4 = $custom4;
         $this->custom5 = $custom5;
+    }
+
+    /** @return string|null */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /** @return int|null */
+    public function getPackageNum(): ?int
+    {
+        return $this->packageNum;
+    }
+
+    /** @return int|null */
+    public function getWarehouse(): ?int
+    {
+        return $this->warehouse;
+    }
+
+    /** @return bool|null */
+    public function getTransportlabel(): ?bool
+    {
+        return $this->transportlabel;
+    }
+
+    /** @return string|null */
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    /** @return string|null */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /** @return string|null */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /** @return string|null */
+    public function getSKU(): ?string
+    {
+        return $this->SKU;
+    }
+
+    /** @return string|null */
+    public function getHsCode(): ?string
+    {
+        return $this->hsCode;
+    }
+
+    /** @return DangerousGoods|null */
+    public function getDangerousGoods(): ?DangerousGoods
+    {
+        return $this->dangerousGoods;
+    }
+
+    /** @return float */
+    public function getQuantity(): float
+    {
+        return $this->quantity;
+    }
+
+    /** @return float */
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    /** @return float */
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    /** @return float */
+    public function getLength(): float
+    {
+        return $this->length;
+    }
+
+    /** @return float */
+    public function getWidth(): float
+    {
+        return $this->width;
+    }
+
+    /** @return bool|null */
+    public function getStock(): ?bool
+    {
+        return $this->stock;
+    }
+
+    /** @return DateTime|null */
+    public function getStockdate(): ?DateTime
+    {
+        return $this->stockdate;
+    }
+
+    /** @return WareHouse|null */
+    public function getWarehouses(): ?WareHouse
+    {
+        return $this->warehouses;
+    }
+
+    /** @return string|null */
+    public function getCustom1(): ?string
+    {
+        return $this->custom1;
+    }
+
+    /** @return string|null */
+    public function getCustom2(): ?string
+    {
+        return $this->custom2;
+    }
+
+    /** @return string|null */
+    public function getCustom3(): ?string
+    {
+        return $this->custom3;
+    }
+
+    /** @return string|null */
+    public function getCustom4(): ?string
+    {
+        return $this->custom4;
+    }
+
+    /** @return string|null */
+    public function getCustom5(): ?string
+    {
+        return $this->custom5;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'packageNum' => $this->getPackageNum(),
+            'warehouse' => $this->getWarehouse(),
+            'transportlabel' => $this->getTransportlabel(),
+            'location' => $this->getLocation(),
+            'description' => $this->getDescription(),
+            'content' => $this->getContent(),
+            'SKU' => $this->getSKU(),
+            'hsCode' => $this->getHsCode(),
+            'dangerousGoods' => $this->getDangerousGoods(),
+            'quantity' => $this->getQuantity(),
+            'value' => $this->getValue(),
+            'weight' => $this->getWeight(),
+            'length' => $this->getLength(),
+            'width' => $this->getWidth(),
+            'stock' => $this->getStock(),
+            'stockdate' => $this->getStockdate(),
+            'warehouses' => $this->getWarehouses(),
+            'custom1' => $this->getCustom1(),
+            'custom2' => $this->getCustom2(),
+            'custom3' => $this->getCustom3(),
+            'custom4' => $this->getCustom4(),
+            'custom5' => $this->getCustom5(),
+        ];
     }
 }

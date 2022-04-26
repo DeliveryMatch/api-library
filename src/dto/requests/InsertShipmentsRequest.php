@@ -2,4 +2,4 @@
 
 namespace DeliveryMatchApiLibrary\dto\requests;
 
-class InsertShipmentsRequest extends InsertShipmentRequest {}
+class InsertShipmentsRequest extends InsertShipmentRequest implements \JsonSerializable {}

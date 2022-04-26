@@ -5,7 +5,7 @@ namespace DeliveryMatchApiLibrary\dto\requests;
 use DateTime;
 use JetBrains\PhpStorm\Internal;
 
-class GetShipmentsRequest
+class GetShipmentsRequest implements \JsonSerializable
 {
     protected DateTime $dateFrom;
     protected DateTime $dateTo;
@@ -59,10 +59,17 @@ class GetShipmentsRequest
     {
         return
             [
-                'dateFrom' => $this->getDateFrom(),
-                'dateTo' => $this->getDateTo(),
+                'dateFrom' => $this->getDateFrom()->format("YYY-MM-DD"),
+                'dateTo' => $this->getDateTo()->format("YYY-MM-DD"),
                 'status' => $this->getStatus(),
                 'channel' => $this->getChannel()
             ];
+//        return
+//            [
+//                'dateFrom' => $this->getDateFrom(),
+//                'dateTo' => $this->getDateTo(),
+//                'status' => $this->getStatus(),
+//                'channel' => $this->getChannel()
+//            ];
     }
 }

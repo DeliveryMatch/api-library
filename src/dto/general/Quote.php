@@ -2,16 +2,28 @@
 
 namespace DeliveryMatchApiLibrary\dto\general;
 
-class Quote
+class Quote implements \JsonSerializable
 {
     /** @var Product[] */
-    private array $product;
+    protected array $product;
 
-    /**
-     * @param Product[] $product
-     */
+    /** @param Product[] $product */
     public function __construct(array $product)
     {
         $this->product = $product;
+    }
+
+    /** @return Product[] */
+    public function getProduct(): array
+    {
+        return $this->product;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+            'product' => $this->getProduct(),
+        ];
     }
 }

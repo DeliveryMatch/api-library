@@ -52,97 +52,73 @@ class InsertShipmentRequest
     }
 
 
-    /**
-     * @return Client
-     */
+    /** @return Client */
     public function getClient()
     {
         return $this->client;
     }
 
-    /**
-     * @return Shipment
-     */
+    /** @return Shipment */
     public function getShipment()
     {
         return $this->shipment;
     }
 
-    /**
-     * @return Sender|null
-     */
+    /** @return Sender|null */
     public function getSender()
     {
         return $this->sender;
     }
 
-    /**
-     * @return Customer|null
-     */
+    /** @return Customer|null */
     public function getCustomer()
     {
         return $this->customer;
     }
 
-    /**
-     * @return Packages|null
-     */
+    /** @return Packages|null */
     public function getPackages()
     {
         return $this->packages;
     }
 
-    /**
-     * @return Quote|null
-     */
+    /** @return Quote|null */
     public function getQuote()
     {
         return $this->quote;
     }
 
-    /**
-     * @return bool|null
-     */
+    /** @return bool|null */
     public function getFragileGoods()
     {
         return $this->fragileGoods;
     }
 
-    /**
-     * @return bool|null
-     */
+    /** @return bool|null */
     public function getDangerousGoods()
     {
         return $this->dangerousGoods;
     }
 
-    /**
-     * @return float|null
-     */
+    /** @return float|null */
     public function getPriceIncl()
     {
         return $this->priceIncl;
     }
 
-    /**
-     * @return float|null
-     */
+    /** @return float|null */
     public function getPriceExcl()
     {
         return $this->priceExcl;
     }
 
-    /**
-     * @return float|null
-     */
+    /** @return float|null */
     public function getWeight()
     {
         return $this->weight;
     }
 
-    /**
-     * @return array
-     */
+    /** @return array */
     public function jsonSerialize(): array
     {
         return [

@@ -2,7 +2,6 @@
 
 namespace DeliveryMatchApiLibrary\dto\requests;
 
-use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Internal;
 
 class GetShipmentRequest implements \JsonSerializable

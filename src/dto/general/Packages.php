@@ -2,16 +2,28 @@
 
 namespace DeliveryMatchApiLibrary\dto\general;
 
-class Packages
+class Packages implements \JsonSerializable
 {
     /** @var Package[] */
-    private array $packages;
+    protected array $packages;
 
-    /**
-     * @param Package[] $packages
-     */
+    /** @param Package[] $packages */
     public function __construct(array $packages)
     {
         $this->packages = $packages;
+    }
+
+    /** @return Package[] */
+    public function getPackages(): array
+    {
+        return $this->packages;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+            'package' => $this->getPackages(),
+        ];
     }
 }

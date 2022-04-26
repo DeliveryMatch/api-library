@@ -2,34 +2,33 @@
 
 namespace DeliveryMatchApiLibrary\dto\general;
 use DateTime;
-use DeliveryMatchApiLibrary\dto\Date;
 
-class Shipment
+class Shipment implements \JsonSerializable
 {
-    private string $orderNumber;
-    private string $reference;
-    private string $language;
-    private string $currency;
-    private ?DateTime $firstPickUpDate;
-    private ?DateTime $firstPickUpDateTime;
-    private ?string $carrier;
-    private ?string $service;
-    private ?string $deliveryTimeFrom;
-    private ?string $deliveryTimeTo;
-    private ?bool $inbound;
-    private ?int $numPallets;
-    private ?bool $cod;
-    private ?bool $signature;
-    private ?bool $noNeighbor;
-    private ?bool $insured;
-    private ?string $incoterm;
-    private ?string $route;
-    private ?string $warehousezone;
-    private ?string $batch;
-    private ?string $note;
-    private ?string $instructions;
-    private ?string $printerchannel;
-    private ?string $getdiscounts;
+    protected string $orderNumber;
+    protected string $reference;
+    protected string $language;
+    protected string $currency;
+    protected ?DateTime $firstPickUpDate;
+    protected ?DateTime $firstPickUpDateTime;
+    protected ?string $carrier;
+    protected ?string $service;
+    protected ?string $deliveryTimeFrom;
+    protected ?string $deliveryTimeTo;
+    protected ?bool $inbound;
+    protected ?int $numPallets;
+    protected ?bool $cod;
+    protected ?bool $signature;
+    protected ?bool $noNeighbor;
+    protected ?bool $insured;
+    protected ?string $incoterm;
+    protected ?string $route;
+    protected ?string $warehousezone;
+    protected ?string $batch;
+    protected ?string $note;
+    protected ?string $instructions;
+    protected ?string $printerchannel;
+    protected ?string $getdiscounts;
 
     /**
      * @param string $orderNumber
@@ -57,7 +56,7 @@ class Shipment
      * @param string|null $printerchannel
      * @param string|null $getdiscounts
      */
-    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?Date $firstPickUpDate, ?DateTime $firstPickUpDateTime, ?string $carrier, ?string $service, ?string $deliveryTimeFrom, ?string $deliveryTimeTo, ?bool $inbound, ?int $numPallets, ?bool $cod, ?bool $signature, ?bool $noNeighbor, ?bool $insured, ?string $incoterm, ?string $route, ?string $warehousezone, ?string $batch, ?string $note, ?string $instructions, ?string $printerchannel, ?string $getdiscounts)
+    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?DateTime $firstPickUpDate, ?DateTime $firstPickUpDateTime, ?string $carrier, ?string $service, ?string $deliveryTimeFrom, ?string $deliveryTimeTo, ?bool $inbound, ?int $numPallets, ?bool $cod, ?bool $signature, ?bool $noNeighbor, ?bool $insured, ?string $incoterm, ?string $route, ?string $warehousezone, ?string $batch, ?string $note, ?string $instructions, ?string $printerchannel, ?string $getdiscounts)
     {
         $this->orderNumber = $orderNumber;
         $this->reference = $reference;
@@ -85,5 +84,178 @@ class Shipment
         $this->getdiscounts = $getdiscounts;
     }
 
+    /** @return string */
+    public function getOrderNumber(): string
+    {
+        return $this->orderNumber;
+    }
 
+    /** @return string */
+    public function getReference(): string
+    {
+        return $this->reference;
+    }
+
+    /** @return string */
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
+    /** @return string */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    /** @return DateTime|null */
+    public function getFirstPickUpDate(): ?DateTime
+    {
+        return $this->firstPickUpDate;
+    }
+
+    /** @return DateTime|null */
+    public function getFirstPickUpDateTime(): ?DateTime
+    {
+        return $this->firstPickUpDateTime;
+    }
+
+    /** @return string|null */
+    public function getCarrier(): ?string
+    {
+        return $this->carrier;
+    }
+
+    /** @return string|null */
+    public function getService(): ?string
+    {
+        return $this->service;
+    }
+
+    /** @return string|null */
+    public function getDeliveryTimeFrom(): ?string
+    {
+        return $this->deliveryTimeFrom;
+    }
+
+    /** @return string|null */
+    public function getDeliveryTimeTo(): ?string
+    {
+        return $this->deliveryTimeTo;
+    }
+
+    /** @return bool|null */
+    public function getInbound(): ?bool
+    {
+        return $this->inbound;
+    }
+
+    /** @return int|null */
+    public function getNumPallets(): ?int
+    {
+        return $this->numPallets;
+    }
+
+    /** @return bool|null */
+    public function getCod(): ?bool
+    {
+        return $this->cod;
+    }
+
+    /** @return bool|null */
+    public function getSignature(): ?bool
+    {
+        return $this->signature;
+    }
+
+    /** @return bool|null */
+    public function getNoNeighbor(): ?bool
+    {
+        return $this->noNeighbor;
+    }
+
+    /** @return bool|null */
+    public function getInsured(): ?bool
+    {
+        return $this->insured;
+    }
+
+    /** @return string|null */
+    public function getIncoterm(): ?string
+    {
+        return $this->incoterm;
+    }
+
+    /** @return string|null */
+    public function getRoute(): ?string
+    {
+        return $this->route;
+    }
+
+    /** @return string|null */
+    public function getWarehousezone(): ?string
+    {
+        return $this->warehousezone;
+    }
+
+    /** @return string|null */
+    public function getBatch(): ?string
+    {
+        return $this->batch;
+    }
+
+    /** @return string|null */
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    /** @return string|null */
+    public function getInstructions(): ?string
+    {
+        return $this->instructions;
+    }
+
+    /** @return string|null */
+    public function getPrinterchannel(): ?string
+    {
+        return $this->printerchannel;
+    }
+
+    /** @return string|null */
+    public function getGetdiscounts(): ?string
+    {
+        return $this->getdiscounts;
+    }
+
+    /** @return array */
+    public function jsonSerialize(): array
+    {
+        return [
+                'orderNumber' => $this->getOrderNumber(),
+                'reference' => $this->getReference(),
+                'language' => $this->getLanguage(),
+                'currency' => $this->getCurrency(),
+                'firstPickUpDate' => $this->getFirstPickUpDate()->format("YYY-MM-DD"),
+                'firstPickUpDateTime' => $this->getFirstPickUpDateTime()->format("YYY-MM-DD"),
+                'carrier' => $this->getCarrier(),
+                'service' => $this->getService(),
+                'deliveryTimeFrom' => $this->getDeliveryTimeFrom(),
+                'deliveryTimeTo' => $this->getDeliveryTimeTo(),
+                'inbound' => $this->getInbound(),
+                'numPallets' => $this->getNumPallets(),
+                'cod' => $this->getCod(),
+                'signature' => $this->getSignature(),
+                'noNeighbor' => $this->getNoNeighbor(),
+                'insured' => $this->getInsured(),
+                'incoterm' => $this->getIncoterm(),
+                'route' => $this->getRoute(),
+                'warehousezone' => $this->getWarehousezone(),
+                'batch' => $this->getBatch(),
+                'note' => $this->getNote(),
+                'instructions' => $this->getInstructions(),
+                'printerchannel' => $this->getPrinterchannel(),
+                'getdiscounts' => $this->getGetdiscounts(),
+        ];
+    }
 }
