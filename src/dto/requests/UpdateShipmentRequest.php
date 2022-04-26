@@ -7,15 +7,13 @@ use DeliveryMatchApiLibrary\dto\general\Customer;
 use DeliveryMatchApiLibrary\dto\general\Packages;
 use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Sender;
-use DeliveryMatchApiLibrary\dto\general\Shipment;
 use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
-use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Internal;
 
-class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerializable
+class UpdateShipmentRequest implements \JsonSerializable
 {
     protected Client $client;
-    protected Shipment|ShipmentUpdate $shipment;
+    protected ShipmentUpdate $shipment;
     protected ?Sender $sender;
     protected ?Customer $customer;
     protected ?Packages $packages;
@@ -26,11 +24,33 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     protected ?float $priceExcl;
     protected ?float $weight;
 
-    public function __construct(array $updateshipment)
+    /**
+     * @param Client $client
+     * @param ShipmentUpdate $shipment
+     * @param Sender|null $sender
+     * @param Customer|null $customer
+     * @param Packages|null $packages
+     * @param Quote|null $quote
+     * @param bool|null $fragileGoods
+     * @param bool|null $dangerousGoods
+     * @param float|null $priceIncl
+     * @param float|null $priceExcl
+     * @param float|null $weight
+     */
+    public function __construct(Client $client, ShipmentUpdate $shipment, ?Sender $sender, ?Customer $customer, ?Packages $packages, ?Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, ?float $priceIncl, ?float $priceExcl, ?float $weight)
     {
-        parent::__construct($updateshipment);
+        $this->client = $client;
+        $this->shipment = $shipment;
+        $this->sender = $sender;
+        $this->customer = $customer;
+        $this->packages = $packages;
+        $this->quote = $quote;
+        $this->fragileGoods = $fragileGoods;
+        $this->dangerousGoods = $dangerousGoods;
+        $this->priceIncl = $priceIncl;
+        $this->priceExcl = $priceExcl;
+        $this->weight = $weight;
     }
-
 
     /** @return Client */
     public function getClient(): Client
@@ -39,7 +59,7 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     }
 
     /** @return ShipmentUpdate */
-    public function getShipmentUpdate(): ShipmentUpdate
+    public function getShipment(): ShipmentUpdate
     {
         return $this->shipment;
     }
@@ -51,7 +71,7 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     }
 
     /** @return Customer|null */
-    public function getCustomerUpdate(): ?Customer
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
@@ -63,7 +83,7 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     }
 
     /** @return Quote|null */
-    public function getQuoteUpdate(): ?Quote
+    public function getQuote(): ?Quote
     {
         return $this->quote;
     }
@@ -81,7 +101,7 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     }
 
     /** @return float|null */
-    public function getPriceInclUpdate(): ?float
+    public function getPriceIncl(): ?float
     {
         return $this->priceIncl;
     }
@@ -93,7 +113,7 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     }
 
     /** @return float|null */
-    public function getWeightUpdate(): ?float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
@@ -101,31 +121,20 @@ class UpdateShipmentRequest extends InsertShipmentRequest implements \JsonSerial
     /**
      * @return array
      */
-    #[ArrayShape(['client' => "Client",
-        'shipment' => "ShipmentUpdate",
-        'sender' => "Sender|null",
-        'customer' => "Customer|null",
-        'packages' => "Packages|null",
-        'quote' => "Quote|null",
-        'fragileGoods' => "bool|null",
-        'dangerousGoods' => "bool|null",
-        'princeIncl' => "float|null",
-        'priceExcl' => "float|null",
-        'weight' => "float|null"])]
     public function jsonSerialize(): array
     {
         return [
             'client'   => $this->getClient(),
-            'shipment' => $this->getShipmentUpdate(),
+            'shipment' => $this->getShipment(),
             'sender' => $this->getSender(),
-            'customer' => $this->getCustomerUpdate(),
+            'customer' => $this->getCustomer(),
             'packages' => $this->getPackages(),
-            'quote' => $this->getQuoteUpdate(),
+            'quote' => $this->getQuote(),
             'fragileGoods' => $this->getFragileGoods(),
             'dangerousGoods' => $this->getDangerousGoods(),
-            'princeIncl' => $this->getPriceInclUpdate(),
+            'princeIncl' => $this->getPriceIncl(),
             'priceExcl' => $this->getPriceExcl(),
-            'weight' => $this->getWeightUpdate(),
+            'weight' => $this->getWeight(),
         ];
     }
 }

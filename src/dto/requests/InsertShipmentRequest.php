@@ -8,13 +8,11 @@ use DeliveryMatchApiLibrary\dto\general\Packages;
 use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Sender;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
-use DeliveryMatchApiLibrary\dto\general\updates\ShipmentUpdate;
-use JetBrains\PhpStorm\ArrayShape;
 
 class InsertShipmentRequest
 {
     protected Client $client;
-    protected Shipment|ShipmentUpdate $shipment;
+    protected Shipment $shipment;
     protected ?Sender $sender;
     protected ?Customer $customer;
     protected ?Packages $packages;
@@ -26,27 +24,38 @@ class InsertShipmentRequest
     protected ?float $weight;
 
     /**
-     * @param array $insertshipment
+     * @param Client $client
+     * @param Shipment $shipment
+     * @param Sender|null $sender
+     * @param Customer|null $customer
+     * @param Packages|null $packages
+     * @param Quote|null $quote
+     * @param bool|null $fragileGoods
+     * @param bool|null $dangerousGoods
+     * @param float|null $priceIncl
+     * @param float|null $priceExcl
+     * @param float|null $weight
      */
-    public function __construct(array $insertshipment)
+    public function __construct(Client $client, Shipment $shipment, ?Sender $sender, ?Customer $customer, ?Packages $packages, ?Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, ?float $priceIncl, ?float $priceExcl, ?float $weight)
     {
-        $this->client = $insertshipment['client'];
-        $this->shipment = $insertshipment['shipment'];
-        $this->sender = $insertshipment['sender'];
-        $this->customer = $insertshipment['customer'];
-        $this->packages = $insertshipment['packages'];
-        $this->quote = $insertshipment['quote'];
-        $this->fragileGoods = $insertshipment['fragileGoods'];
-        $this->dangerousGoods = $insertshipment['dangerousGoods'];
-        $this->priceIncl = $insertshipment['priceIncl'];
-        $this->priceExcl = $insertshipment['priceExcl'];
-        $this->weight = $insertshipment['weight'];
+        $this->client = $client;
+        $this->shipment = $shipment;
+        $this->sender = $sender;
+        $this->customer = $customer;
+        $this->packages = $packages;
+        $this->quote = $quote;
+        $this->fragileGoods = $fragileGoods;
+        $this->dangerousGoods = $dangerousGoods;
+        $this->priceIncl = $priceIncl;
+        $this->priceExcl = $priceExcl;
+        $this->weight = $weight;
     }
+
 
     /**
      * @return Client
      */
-    public function getClient(): Client
+    public function getClient()
     {
         return $this->client;
     }
@@ -54,7 +63,7 @@ class InsertShipmentRequest
     /**
      * @return Shipment
      */
-    public function getShipment(): Shipment
+    public function getShipment()
     {
         return $this->shipment;
     }
@@ -62,15 +71,15 @@ class InsertShipmentRequest
     /**
      * @return Sender|null
      */
-    public function getSender(): Sender|null
+    public function getSender()
     {
         return $this->sender;
     }
 
     /**
-     * @return Customer
+     * @return Customer|null
      */
-    public function getCustomer(): Customer
+    public function getCustomer()
     {
         return $this->customer;
     }
@@ -78,15 +87,15 @@ class InsertShipmentRequest
     /**
      * @return Packages|null
      */
-    public function getPackages(): Packages|null
+    public function getPackages()
     {
         return $this->packages;
     }
 
     /**
-     * @return Quote
+     * @return Quote|null
      */
-    public function getQuote(): Quote
+    public function getQuote()
     {
         return $this->quote;
     }
@@ -94,7 +103,7 @@ class InsertShipmentRequest
     /**
      * @return bool|null
      */
-    public function getFragileGoods(): bool|null
+    public function getFragileGoods()
     {
         return $this->fragileGoods;
     }
@@ -102,15 +111,15 @@ class InsertShipmentRequest
     /**
      * @return bool|null
      */
-    public function getDangerousGoods(): bool|null
+    public function getDangerousGoods()
     {
         return $this->dangerousGoods;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getPriceIncl(): float
+    public function getPriceIncl()
     {
         return $this->priceIncl;
     }
@@ -118,15 +127,15 @@ class InsertShipmentRequest
     /**
      * @return float|null
      */
-    public function getPriceExcl(): float|null
+    public function getPriceExcl()
     {
         return $this->priceExcl;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getWeight(): float
+    public function getWeight()
     {
         return $this->weight;
     }
@@ -134,17 +143,6 @@ class InsertShipmentRequest
     /**
      * @return array
      */
-    #[ArrayShape(['client' => "Client",
-        'shipment' => "Shipment",
-        'sender' => "Sender|null",
-        'customer' => "Customer",
-        'packages' => "Packages|null",
-        'quote' => "Quote",
-        'fragileGoods' => "bool|null",
-        'dangerousGoods' => "bool|null",
-        'princeIncl' => "float",
-        'priceExcl' => "float|null",
-        'weight' => "float"])]
     public function jsonSerialize(): array
     {
         return [

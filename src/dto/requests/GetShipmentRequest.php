@@ -10,11 +10,14 @@ class GetShipmentRequest implements \JsonSerializable
     protected int $id;
     protected string $orderNumber;
 
-    /** @param array $shipment */
-    public function __construct(array $shipment)
+    /**
+     * @param int $id
+     * @param string $orderNumber
+     */
+    public function __construct(int $id, string $orderNumber)
     {
-        $this->id = $shipment['id'];
-        $this->orderNumber = $shipment['orderNumber'];
+        $this->id = $id;
+        $this->orderNumber = $orderNumber;
     }
 
     /** @return int */
@@ -30,7 +33,7 @@ class GetShipmentRequest implements \JsonSerializable
     }
 
     /** @return array */
-    #[ArrayShape(["shipment" => "array"])] public function jsonSerialize(): array
+    public function jsonSerialize(): array
     {
         return
             [ "shipment" =>
