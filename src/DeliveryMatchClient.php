@@ -2,6 +2,8 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DeliveryMatchApiLibrary\dto\requests\getLocationsRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
@@ -43,61 +45,81 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function insertShipment(InsertShipmentRequest $insertShipmentRequest): mixed {
+    public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
         return $this->connectApi("insertShipment", $insertShipmentRequest);
     }
 
     /**
      * @param InsertShipmentsRequest $insertShipmentsRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest): mixed
+    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
     {
         return $this->connectApi("insertShipments", $insertShipmentsRequest);
     }
 
     /**
      * @param UpdateShipmentRequest $updateShipmentRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest): mixed
+    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest)
     {
         return $this->connectApi("updateShipment", $updateShipmentRequest);
     }
 
     /**
      * @param UpdateShipmentsRequest $updateShipmentsRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest): mixed
+    public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest)
     {
         return $this->connectApi("updateShipments", $updateShipmentsRequest);
     }
 
     /**
      * @param GetShipmentRequest $getShipmentRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function getShipment(getShipmentRequest $getShipmentRequest): mixed
+    public function getShipment(getShipmentRequest $getShipmentRequest)
     {
         return $this->connectApi("getShipment", $getShipmentRequest);
     }
 
     /**
      * @param GetShipmentsRequest $getShipmentsRequest
-     * @return mixed
+     * @return mixed|string
      * @throws DeliveryMatchException
      */
-    public function getShipments(getShipmentsRequest $getShipmentsRequest): mixed
+    public function getShipments(getShipmentsRequest $getShipmentsRequest)
     {
         return $this->connectApi("getShipments", $getShipmentsRequest);
+    }
+
+    /**
+     * @param GetLocationsRequest $getLocationsRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getLocations(GetLocationsRequest $getLocationsRequest)
+    {
+        return $this->connectApi("getLocations", $getLocationsRequest);
+    }
+
+    /**
+     * @param GetServicesRequest $getServicesRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getServices(GetServicesRequest $getServicesRequest)
+    {
+        return $this->connectApi("getServices", $getServicesRequest);
     }
 
     /**
@@ -137,6 +159,11 @@ class DeliveryMatchClient
         }
 
         $result = json_decode($response);
+
+        if(!isset($result->status) && $http_code == "200") {
+            $result->code = $http_code;
+            $result->status = "success";
+        }
 
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);

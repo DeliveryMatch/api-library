@@ -28,64 +28,64 @@ $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SER
 
 //$shipment = new GetShipmentRequest(123, "test123");
 //$shipment = new GetShipmentsRequest(new DateTime('2022-02-20'), new DateTime('2022-02-25'), null, null);
-$shipment = new UpdateShipmentRequest(
-        new Client(66, "API", null, Action::BOOK, Method::FIRST, null, null),
-        new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
-        new Sender(
-            new Address("Test van Test", null, "Testertje", null, "Straatje", "12", "A", "1234AB", "Den Haag", "Nederland", null, null),
-            new Contact("0612345678", "test@gmail.com")
-        ),
-        new Customer("66", new Address("Test van Test", null, "Testertje", null, "Straatje", "12", "A", "1234AB", "Den Haag", "Nederland", null, null), null, null),
-        new Packages([new Package(
-            null,
-            "something",
-            null,
-            10,
-            20,
-            20,
-            20),
-            new Package(
-                null,
-                "something2",
-                null,
-                10,
-                20,
-                20,
-                20)
-        ]),
-        new Quote([new Product(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            2,
-            20,
-            5,
-            20,
-            20,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-        )]),
-        null,
-        null,
-        null,
-        null,
-        null,
-);
+//$shipment = new UpdateShipmentRequest(
+//        new Client(66, "API", null, Action::BOOK, Method::FIRST, null, null),
+//        new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
+//        new Sender(
+//            new Address("Test van Test", null, "Testertje", null, "Straatje", "12", "A", "1234AB", "Den Haag", "Nederland", null, null),
+//            new Contact("0612345678", "test@gmail.com")
+//        ),
+//        new Customer("66", new Address("Test van Test", null, "Testertje", null, "Straatje", "12", "A", "1234AB", "Den Haag", "Nederland", null, null), null, null),
+//        new Packages([new Package(
+//            null,
+//            "something",
+//            null,
+//            10,
+//            20,
+//            20,
+//            20),
+//            new Package(
+//                null,
+//                "something2",
+//                null,
+//                10,
+//                20,
+//                20,
+//                20)
+//        ]),
+//        new Quote([new Product(
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            2,
+//            20,
+//            5,
+//            20,
+//            20,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//            null,
+//        )]),
+//        null,
+//        null,
+//        null,
+//        null,
+//        null,
+//);
 
-echo json_encode($shipment, JSON_PRETTY_PRINT);
+//echo json_encode($shipment, JSON_PRETTY_PRINT);
 
 try {
 //    $res = $api->getShipments($shipment);
