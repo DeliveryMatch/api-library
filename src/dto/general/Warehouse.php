@@ -35,7 +35,7 @@ class Warehouse implements \JsonSerializable
     {
         return [
             'id' => $this->getId(),
-            'stockdate' => $this->getStockdate()
+            'stockdate' => $this->getStockdate()->format('Y-m-d')
         ];
     }
 }
