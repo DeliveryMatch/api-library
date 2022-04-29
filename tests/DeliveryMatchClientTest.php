@@ -194,33 +194,33 @@ class DeliveryMatchClientTest extends TestCase
 //    }
 
 //    Returns empty shipments array, for some reason ? http code is 200
-//
-//    /**
-//     * @throws DeliveryMatchException
-//     */
-//    public function test_update_shipmentS_should_throw_exception() {
-//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-//        $shipment = new UpdateShipmentsRequest(
-//            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
-//            new ShipmentUpdate(123456, Status::DRAFT, null, null, null, null, null),
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null
-//            );
-//
-//        print_r($this->expectException(DeliveryMatchException::class));
-////        $this->expectExceptionMessage(null);
-////        $this->expectExceptionCode(null);
-//
-//        print_r($shipment);
-//        print_r($api->updateShipments($shipment));
-//    }
+    /**
+     * @throws DeliveryMatchException
+     */
+    public function test_update_shipmentS_should_throw_exception() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new UpdateShipmentsRequest(
+            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
+            new ShipmentUpdate(123456, Status::DRAFT, null, null, null, null, null),
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+            );
+
+        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
+
+        $this->expectException(DeliveryMatchException::class);
+//        $this->expectExceptionMessage(null);
+//        $this->expectExceptionCode(null);
+
+        print_r($api->updateShipments($shipment));
+    }
 
     /**
      * @throws DeliveryMatchException
@@ -241,6 +241,7 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetServicesRequest("NL", "BE");
 
         $res = $api->getServices($shipment);
+        print_r($res);
         $this->assertEquals("success", $res->status);
         $this->assertEquals(200, $res->code);
     }

@@ -160,10 +160,10 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
-        if(!isset($result->status) && $http_code == "200") {
-            $result->code = $http_code;
-            $result->status = "success";
-        }
+//        if(!isset($result->status) && $http_code == "200") {
+//            $result->code = $http_code;
+//            $result->status = "success";
+//        }
 
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);
