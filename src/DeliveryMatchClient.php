@@ -2,7 +2,8 @@
 
 namespace DeliveryMatchApiLibrary;
 
-use DeliveryMatchApiLibrary\dto\requests\getLocationsRequest;
+use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
@@ -120,6 +121,15 @@ class DeliveryMatchClient
     public function getServices(GetServicesRequest $getServicesRequest)
     {
         return $this->connectApi("getServices", $getServicesRequest);
+    }
+
+    /**
+     * @param GetLabelRequest $getLabelRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getLabel(GetLabelRequest $getLabelRequest) {
+        return $this->connectApi("getLabel", $getLabelRequest);
     }
 
     /**

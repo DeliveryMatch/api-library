@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\requests;
 
-class getLocationsRequest implements \JsonSerializable
+class GetLocationsRequest implements \JsonSerializable
 {
     protected int $id;
     protected string $orderNumber;
@@ -62,7 +62,7 @@ class getLocationsRequest implements \JsonSerializable
         return
             [ "shipment" =>
                 [
-                    'id'   => $this->getId(),
+                    'id' => $this->getId(),
                     'orderNumber' => $this->getorderNumber()
                 ],
               "address" =>
