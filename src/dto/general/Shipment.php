@@ -13,8 +13,8 @@ class Shipment implements \JsonSerializable
     protected ?DateTime $firstPickUpDateTime;
     protected ?string $carrier;
     protected ?string $service;
-    protected ?string $deliveryTimeFrom;
-    protected ?string $deliveryTimeTo;
+    protected ?DateTime $deliveryTimeFrom;
+    protected ?DateTime $deliveryTimeTo;
     protected ?bool $inbound;
     protected ?int $numPallets;
     protected ?bool $cod;
@@ -39,8 +39,8 @@ class Shipment implements \JsonSerializable
      * @param DateTime|null $firstPickUpDateTime
      * @param string|null $carrier
      * @param string|null $service
-     * @param string|null $deliveryTimeFrom
-     * @param string|null $deliveryTimeTo
+     * @param DateTime|null $deliveryTimeFrom
+     * @param DateTime|null $deliveryTimeTo
      * @param bool|null $inbound
      * @param int|null $numPallets
      * @param bool|null $cod
@@ -56,7 +56,7 @@ class Shipment implements \JsonSerializable
      * @param string|null $printerchannel
      * @param string|null $getdiscounts
      */
-    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?DateTime $firstPickUpDate, ?DateTime $firstPickUpDateTime, ?string $carrier, ?string $service, ?string $deliveryTimeFrom, ?string $deliveryTimeTo, ?bool $inbound, ?int $numPallets, ?bool $cod, ?bool $signature, ?bool $noNeighbor, ?bool $insured, ?string $incoterm, ?string $route, ?string $warehousezone, ?string $batch, ?string $note, ?string $instructions, ?string $printerchannel, ?string $getdiscounts)
+    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?DateTime $firstPickUpDate, ?DateTime $firstPickUpDateTime, ?string $carrier, ?string $service, ?DateTime $deliveryTimeFrom, ?DateTime $deliveryTimeTo, ?bool $inbound, ?int $numPallets, ?bool $cod, ?bool $signature, ?bool $noNeighbor, ?bool $insured, ?string $incoterm, ?string $route, ?string $warehousezone, ?string $batch, ?string $note, ?string $instructions, ?string $printerchannel, ?string $getdiscounts)
     {
         $this->orderNumber = $orderNumber;
         $this->reference = $reference;
@@ -132,14 +132,14 @@ class Shipment implements \JsonSerializable
         return $this->service;
     }
 
-    /** @return string|null */
-    public function getDeliveryTimeFrom(): ?string
+    /** @return DateTime|null */
+    public function getDeliveryTimeFrom(): ?DateTime
     {
         return $this->deliveryTimeFrom;
     }
 
-    /** @return string|null */
-    public function getDeliveryTimeTo(): ?string
+    /** @return DateTime|null */
+    public function getDeliveryTimeTo(): ?DateTime
     {
         return $this->deliveryTimeTo;
     }
@@ -240,8 +240,8 @@ class Shipment implements \JsonSerializable
                 'firstPickUpDateTime' => $this->getFirstPickUpDateTime()->format('Y-m-d'),
                 'carrier' => $this->getCarrier(),
                 'service' => $this->getService(),
-                'deliveryTimeFrom' => $this->getDeliveryTimeFrom(),
-                'deliveryTimeTo' => $this->getDeliveryTimeTo(),
+                'deliveryTimeFrom' => $this->getDeliveryTimeFrom()->format('Y-m-d'),
+                'deliveryTimeTo' => $this->getDeliveryTimeTo()->format('Y-m-d'),
                 'inbound' => $this->getInbound(),
                 'numPallets' => $this->getNumPallets(),
                 'cod' => $this->getCod(),

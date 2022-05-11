@@ -42,14 +42,14 @@ class GetShipmentsRequest implements \JsonSerializable
         return $this->dateTo;
     }
 
-    /** @return string */
-    public function getStatus(): string
+    /** @return string|null */
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /** @return string */
-    public function getChannel(): string
+    /** @return string|null */
+    public function getChannel(): ?string
     {
         return $this->channel;
     }
@@ -59,17 +59,10 @@ class GetShipmentsRequest implements \JsonSerializable
     {
         return
             [
-                'dateFrom' => $this->getDateFrom()->format("YYY-MM-DD"),
-                'dateTo' => $this->getDateTo()->format("YYY-MM-DD"),
+                'dateFrom' => $this->getDateFrom()->format("Y-m-d"),
+                'dateTo' => $this->getDateTo()->format("Y-m-d"),
                 'status' => $this->getStatus(),
                 'channel' => $this->getChannel()
             ];
-//        return
-//            [
-//                'dateFrom' => $this->getDateFrom(),
-//                'dateTo' => $this->getDateTo(),
-//                'status' => $this->getStatus(),
-//                'channel' => $this->getChannel()
-//            ];
     }
 }

@@ -246,8 +246,8 @@ class DeliveryMatchClientTest extends TestCase
 
         $res = $api->getServices($shipment);
         print_r($res);
-//        $this->assertEquals("success", $res->status);
-//        $this->assertEquals(200, $res->code);
+        $this->assertEquals("success", $res->status);
+        $this->assertEquals(200, $res->code);
     }
 
     /**

@@ -2,11 +2,13 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DeliveryMatchApiLibrary\dto\requests\GetDesignRequest;
 use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
@@ -133,6 +135,24 @@ class DeliveryMatchClient
     }
 
     /**
+     * @param GetUserActivityRequest $getUserActivityRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
+        return $this->connectApi("getUserActivity", $getUserActivityRequest);
+    }
+
+    /**
+     * @param GetDesignRequest $getDesignRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getDesign(GetDesignRequest $getDesignRequest) {
+        return $this->connectApi("getDesign", $getDesignRequest);
+    }
+
+    /**
      * @param string $method
      *
      * @param $data
@@ -170,10 +190,10 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
-//        if(!isset($result->status) && $http_code == "200") {
-//            $result->code = $http_code;
-//            $result->status = "success";
-//        }
+        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
+            $result->code = $http_code;
+            $result->status = "success";
+        }
 
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);

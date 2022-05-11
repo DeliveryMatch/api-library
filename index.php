@@ -27,7 +27,7 @@ require __DIR__ . DIRECTORY_SEPARATOR ."vendor" . DIRECTORY_SEPARATOR . "autoloa
 $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
 
 //$shipment = new GetShipmentRequest(123, "test123");
-//$shipment = new GetShipmentsRequest(new DateTime('2022-02-20'), new DateTime('2022-02-25'), null, null);
+$shipment = new GetShipmentsRequest(new DateTime('2022-02-20'), new DateTime('2022-02-25'), null, null);
 //$shipment = new UpdateShipmentRequest(
 //        new Client(66, "API", null, Action::BOOK, Method::FIRST, null, null),
 //        new ShipmentUpdate(123456, Status::DELIVERED, null, null, null, null, null),
@@ -88,9 +88,9 @@ $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SER
 //echo json_encode($shipment, JSON_PRETTY_PRINT);
 
 try {
-//    $res = $api->getShipments($shipment);
+    $res = $api->getShipments($shipment);
 //    $res = $api->updateShipment($shipment);
-//    print_r($res);
+    print_r($res);
 
 } catch (\DeliveryMatchApiLibrary\exceptions\DeliveryMatchException $e) {
     print_r($e);
