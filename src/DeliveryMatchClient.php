@@ -16,6 +16,7 @@ use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
+use function PHPUnit\Framework\isEmpty;
 
 class DeliveryMatchClient
 {
@@ -190,13 +191,30 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
-        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
+        print_r($result);
+
+//        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
+//            $result->code = $http_code;
+//            $result->status = "success";
+//        }
+
+        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
             $result->code = $http_code;
             $result->status = "success";
+            return $result;
+//            print_r($method);
+
+//            print_r("after change:");
+//            print_r($result);
         }
 
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);
+        }
+
+        if ($method == "getShipments" && isset($result->status) && $result->status == NULL) {
+            var_dump($result);
+            throw new DeliveryMatchException("Shipment could not be stored", 8, "failure");
         }
 
         if (!isset($result) && (!isset($result->code) || $http_code !== "200")) {

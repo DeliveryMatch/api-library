@@ -9,7 +9,7 @@ use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Sender;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
 
-class InsertShipmentRequest
+class InsertShipmentRequest implements \JsonSerializable
 {
     protected Client $client;
     protected Shipment $shipment;
@@ -130,7 +130,7 @@ class InsertShipmentRequest
             'quote' => $this->getQuote(),
             'fragileGoods' => $this->getFragileGoods(),
             'dangerousGoods' => $this->getDangerousGoods(),
-            'princeIncl' => $this->getPriceIncl(),
+            'priceIncl' => $this->getPriceIncl(),
             'priceExcl' => $this->getPriceExcl(),
             'weight' => $this->getWeight(),
         ];

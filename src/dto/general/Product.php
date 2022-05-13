@@ -239,7 +239,7 @@ class Product implements \JsonSerializable
             'length' => $this->getLength(),
             'width' => $this->getWidth(),
             'stock' => $this->getStock(),
-            'stockdate' => $this->getStockdate()->format('Y-m-d'),
+            'stockdate' => is_null($this->getStockdate()) ? $this->getStockdate() : $this->getStockdate()->format('Y-m-d'),
             'warehouses' => $this->getWarehouses(),
             'custom1' => $this->getCustom1(),
             'custom2' => $this->getCustom2(),
