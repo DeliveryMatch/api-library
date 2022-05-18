@@ -12,7 +12,7 @@ use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
-use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
@@ -49,7 +49,7 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return mixed|string
+     * @return InsertShipmentRequest
      * @throws DeliveryMatchException
      */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
@@ -58,7 +58,7 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentsRequest $insertShipmentsRequest
-     * @return mixed|string
+     * @return InsertShipmentsRequest
      * @throws DeliveryMatchException
      */
     public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
@@ -68,7 +68,7 @@ class DeliveryMatchClient
 
     /**
      * @param UpdateShipmentRequest $updateShipmentRequest
-     * @return mixed|string
+     * @return UpdateShipmentRequest
      * @throws DeliveryMatchException
      */
     public function updateShipment(UpdateShipmentRequest $updateShipmentRequest)
@@ -77,18 +77,18 @@ class DeliveryMatchClient
     }
 
     /**
-     * @param UpdateShipmentsRequest $updateShipmentsRequest
-     * @return mixed|string
+     * @param UpdateShipmentMethodRequest $UpdateShipmentMethodRequest
+     * @return UpdateShipmentMethodRequest
      * @throws DeliveryMatchException
      */
-    public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest)
+    public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest)
     {
-        return $this->connectApi("updateShipments", $updateShipmentsRequest);
+        return $this->connectApi("updateShipmentMethod", $UpdateShipmentMethodRequest);
     }
 
     /**
      * @param GetShipmentRequest $getShipmentRequest
-     * @return mixed|string
+     * @return getShipmentRequest
      * @throws DeliveryMatchException
      */
     public function getShipment(getShipmentRequest $getShipmentRequest)
@@ -98,7 +98,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetShipmentsRequest $getShipmentsRequest
-     * @return mixed|string
+     * @return getShipmentsRequest
      * @throws DeliveryMatchException
      */
     public function getShipments(getShipmentsRequest $getShipmentsRequest)
@@ -108,7 +108,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetLocationsRequest $getLocationsRequest
-     * @return mixed|string
+     * @return GetLocationsRequest
      * @throws DeliveryMatchException
      */
     public function getLocations(GetLocationsRequest $getLocationsRequest)
@@ -118,7 +118,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetServicesRequest $getServicesRequest
-     * @return mixed|string
+     * @return GetServicesRequest
      * @throws DeliveryMatchException
      */
     public function getServices(GetServicesRequest $getServicesRequest)
@@ -128,7 +128,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetLabelRequest $getLabelRequest
-     * @return mixed|string
+     * @return GetLabelRequest
      * @throws DeliveryMatchException
      */
     public function getLabel(GetLabelRequest $getLabelRequest) {
@@ -137,7 +137,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetUserActivityRequest $getUserActivityRequest
-     * @return mixed|string
+     * @return GetUserActivityRequest
      * @throws DeliveryMatchException
      */
     public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
@@ -146,7 +146,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetDesignRequest $getDesignRequest
-     * @return mixed|string
+     * @return GetDesignRequest
      * @throws DeliveryMatchException
      */
     public function getDesign(GetDesignRequest $getDesignRequest) {
@@ -191,21 +191,11 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
-        print_r($result);
-
-//        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
-//            $result->code = $http_code;
-//            $result->status = "success";
-//        }
-
-        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
+        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || ($method == "getShipment" && (!isset($result->status) || $result->status != "failure")) || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
             $result->code = $http_code;
             $result->status = "success";
+            print_r($result);
             return $result;
-//            print_r($method);
-
-//            print_r("after change:");
-//            print_r($result);
         }
 
         if (isset($result->status) && $result->status !== "success") {

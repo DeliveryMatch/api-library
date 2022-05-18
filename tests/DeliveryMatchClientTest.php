@@ -16,10 +16,11 @@ use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
-use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use PHPUnit\Framework\TestCase;
@@ -81,12 +82,12 @@ class DeliveryMatchClientTest extends TestCase
         }
     }
 
-//    Works, just uncommented to prevent spam inserts
+//    // Works, just uncommented to prevent spam inserts
 //    public function test_insert_shipment_should_give_valid_response() {
 //        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
 //        $shipment = new InsertShipmentRequest(
-//            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
-//            new Shipment("test_123", "test_123_r", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
+//            new Client(1, "API", null, Action::SHOW, Method::FIRST, null, null),
+//            new Shipment("libraryTest123", "libraryTest123", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
 //            null,
 //            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "NL", null, null), null, null),
 //            null,
@@ -99,7 +100,9 @@ class DeliveryMatchClientTest extends TestCase
 //            15
 //        );
 //
+//
 //        $res = $api->insertShipment($shipment);
+//        print_r($res);
 //        $this->assertEquals("success", $res->status);
 //        $this->assertEquals(7, $res->code);
 //        $this->assertEquals("Shipment successfully stored", $res->message);
@@ -155,7 +158,7 @@ class DeliveryMatchClientTest extends TestCase
     /**
      * @throws DeliveryMatchException
      */
-    public function test_update_shipment_should_throw_exception() { // Works
+    public function test_update_shipment_should_throw_exception() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new UpdateShipmentRequest(
                 new Client(66, "API", null, Action::BOOK, Method::FIRST, null, null),
@@ -178,47 +181,49 @@ class DeliveryMatchClientTest extends TestCase
         $api->updateShipment($shipment);
     }
 
-//    Returns empty shipments array, for some reason ? http code is 200
-//    /**
-//     * @throws DeliveryMatchException
-//     */
-//    public function test_update_shipmentS_should_throw_exception() {
-//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-//        $shipment = new UpdateShipmentsRequest(
-//            new Client(1, "API", null, Action::BOOK, Method::FIRST, null, null),
-//            new ShipmentUpdate(123456, Status::DRAFT, null, null, null, null, null),
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null,
-//            null
-//            );
-//
-//        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
-//
-//        $this->expectException(DeliveryMatchException::class);
-//        $this->expectExceptionMessage("Shipment could not be stored");
-//        $this->expectExceptionCode(8);
-//
-//        var_dump($api->updateShipments($shipment));
-//    }
+    /**
+     * @throws DeliveryMatchException
+     */
+    public function test_update_shipment_method_should_throw_exception() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new UpdateShipmentMethodRequest(8784637, null, 'book', null,Action::BOOK);
+
+        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
+
+        $this->expectException(DeliveryMatchException::class);
+        $this->expectExceptionMessage("failure: Cannot update shipment method for booked shipment");
+        $this->expectExceptionCode(39);
+
+        $res = $api->updateShipmentMethod($shipment);
+
+        print_r($res);
+    }
+
+    public function test_get_shipment_should_give_valid_response() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new GetShipmentRequest(8577049, '147147');
+
+        $res = $api->getShipment($shipment);
+
+        print_r("test get shipment valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
+        $this->assertEquals(200, $res->code);
+        $this->assertEquals("success", $res->status);
+    }
 
     /**
      * @throws DeliveryMatchException
      */
     public function test_get_shipment_should_throw_exception() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new GetShipmentRequest(123, 'TUIN1000400374');
+        $shipment = new GetShipmentRequest(123, '123456789');
 
         $this->expectException(DeliveryMatchException::class);
         $this->expectExceptionMessage("failure: Shipment not found");
         $this->expectExceptionCode(32);
 
-        $api->getShipment($shipment);
+        $res = $api->getShipment($shipment);
+        print_r($res);
     }
 
     /**
@@ -252,6 +257,7 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetLabelRequest(8577049, "147147", null, null);
 
         $res = $api->getLabel($shipment);
+        print_r($res);
         $this->assertEquals("success", $res->status);
         $this->assertEquals(200, $res->code);
         $this->assertEquals("Shipment label(s) found", $res->message);
@@ -299,31 +305,33 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetDesignRequest('NL', null);
 
         $res = $api->getDesign($shipment);
+        print_r($res);
         $this->assertEquals("success", $res->status);
         $this->assertEquals(690, $res->code);
         $this->assertEquals("Successfully collected design", $res->message);
     }
 
-    public function test_get_user_activity_should_give_valid_response() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new GetDesignRequest('NL', null);
-
-        $res = $api->getDesign($shipment);
-        $this->assertEquals("success", $res->status);
-        $this->assertEquals(690, $res->code);
-        $this->assertEquals("Successfully collected design", $res->message);
-    }
-
+    //failure: Account not yet authorized to use this functionality
+//    public function test_get_user_activity_should_give_valid_response() {
+//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+//        $shipment = new GetUserActivityRequest(new DateTime('2022-04-08'), new DateTime('2022-05-18'));
+//
+//        $res = $api->getUserActivity($shipment);
+//        $this->assertEquals("success", $res->status);
+//        $this->assertEquals(790, $res->code);
+//        $this->assertEquals("Successfully collected user activity", $res->message);
+//    }
+//
     /**
      * @throws DeliveryMatchException
      */
     public function test_get_user_activity_should_throw_exception() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new GetLabelRequest(null, null, null, null);
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], "abcdefg123456789", $_SERVER["URL"]);
+        $shipment = new GetUserActivityRequest(new DateTime('now'), new DateTime('now'));
 
         $this->expectException(DeliveryMatchException::class);
-        $this->expectExceptionMessage("failure: Shipment not found");
-        $this->expectExceptionCode(32);
-        $api->getLabel($shipment);
+        $this->expectExceptionMessage("unauthorized: API key not valid");
+        $this->expectExceptionCode(2);
+        $api->getUserActivity($shipment);
     }
 }
