@@ -2,10 +2,21 @@
 
 namespace DeliveryMatchApiLibrary;
 
-use DeliveryMatchApiLibrary\dto\InsertShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetDesignRequest;
+use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
+use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
+use function PHPUnit\Framework\isEmpty;
 
 class DeliveryMatchClient
 {
@@ -36,8 +47,110 @@ class DeliveryMatchClient
         return $this->connectApi($method, $data);
     }
 
+    /**
+     * @param InsertShipmentRequest $insertShipmentRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
         return $this->connectApi("insertShipment", $insertShipmentRequest);
+    }
+
+    /**
+     * @param InsertShipmentsRequest $insertShipmentsRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
+    {
+        return $this->connectApi("insertShipments", $insertShipmentsRequest);
+    }
+
+    /**
+     * @param UpdateShipmentRequest $updateShipmentRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest)
+    {
+        return $this->connectApi("updateShipment", $updateShipmentRequest);
+    }
+
+    /**
+     * @param UpdateShipmentsRequest $updateShipmentsRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest)
+    {
+        return $this->connectApi("updateShipments", $updateShipmentsRequest);
+    }
+
+    /**
+     * @param GetShipmentRequest $getShipmentRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getShipment(getShipmentRequest $getShipmentRequest)
+    {
+        return $this->connectApi("getShipment", $getShipmentRequest);
+    }
+
+    /**
+     * @param GetShipmentsRequest $getShipmentsRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getShipments(getShipmentsRequest $getShipmentsRequest)
+    {
+        return $this->connectApi("getShipments", $getShipmentsRequest);
+    }
+
+    /**
+     * @param GetLocationsRequest $getLocationsRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getLocations(GetLocationsRequest $getLocationsRequest)
+    {
+        return $this->connectApi("getLocations", $getLocationsRequest);
+    }
+
+    /**
+     * @param GetServicesRequest $getServicesRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getServices(GetServicesRequest $getServicesRequest)
+    {
+        return $this->connectApi("getServices", $getServicesRequest);
+    }
+
+    /**
+     * @param GetLabelRequest $getLabelRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getLabel(GetLabelRequest $getLabelRequest) {
+        return $this->connectApi("getLabel", $getLabelRequest);
+    }
+
+    /**
+     * @param GetUserActivityRequest $getUserActivityRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
+        return $this->connectApi("getUserActivity", $getUserActivityRequest);
+    }
+
+    /**
+     * @param GetDesignRequest $getDesignRequest
+     * @return mixed|string
+     * @throws DeliveryMatchException
+     */
+    public function getDesign(GetDesignRequest $getDesignRequest) {
+        return $this->connectApi("getDesign", $getDesignRequest);
     }
 
     /**
@@ -70,6 +183,7 @@ class DeliveryMatchClient
         ));
 
         $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if (!$response) {
             throw new Exception(curl_error($ch), curl_errno($ch));
@@ -77,11 +191,33 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
+        print_r($result);
+
+//        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
+//            $result->code = $http_code;
+//            $result->status = "success";
+//        }
+
+        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
+            $result->code = $http_code;
+            $result->status = "success";
+            return $result;
+//            print_r($method);
+
+//            print_r("after change:");
+//            print_r($result);
+        }
+
         if (isset($result->status) && $result->status !== "success") {
             throw new DeliveryMatchException($result->message, $result->code, $result->status);
         }
 
-        if (!isset($result->status) && !isset($result->code)) {
+        if ($method == "getShipments" && isset($result->status) && $result->status == NULL) {
+            var_dump($result);
+            throw new DeliveryMatchException("Shipment could not be stored", 8, "failure");
+        }
+
+        if (!isset($result) && (!isset($result->code) || $http_code !== "200")) {
             throw new InvalidDeliveryMatchLinkException($this->url);
         }
 
