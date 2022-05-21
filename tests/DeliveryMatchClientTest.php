@@ -16,6 +16,7 @@ use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetServicesRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetShipmentRequest;
+use DeliveryMatchApiLibrary\dto\requests\GetShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
@@ -82,7 +83,7 @@ class DeliveryMatchClientTest extends TestCase
         }
     }
 
-//    // Works, just uncommented to prevent spam inserts
+//    // Works, just commented to prevent spam inserts
 //    public function test_insert_shipment_should_give_valid_response() {
 //        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
 //        $shipment = new InsertShipmentRequest(
@@ -102,13 +103,14 @@ class DeliveryMatchClientTest extends TestCase
 //
 //
 //        $res = $api->insertShipment($shipment);
-//        print_r($res);
+//        print_r("test insert shipment valid response: ");
+//        print_r(json_encode($res, JSON_PRETTY_PRINT));
 //        $this->assertEquals("success", $res->status);
 //        $this->assertEquals(7, $res->code);
 //        $this->assertEquals("Shipment successfully stored", $res->message);
 //    }
-
-//    Works as well, just uncommented to prevent spam inserts
+//
+//    // Works as well, just commented to prevent spam inserts
 //    public function test_insert_shipmentS_should_give_valid_response() {
 //        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
 //        $shipment = new InsertShipmentsRequest(
@@ -125,10 +127,12 @@ class DeliveryMatchClientTest extends TestCase
 //            null,
 //            15);
 //
-//        $res = $api->insertShipment($shipment);
+//        $res = $api->insertShipments($shipment);
+//        print_r("test update shipments valid response: ");
+//        print_r(json_encode($res, JSON_PRETTY_PRINT));
 //        $this->assertEquals("success", $res->status);
 //        $this->assertEquals(7, $res->code);
-//        $this->assertEquals("Shipment successfully stored", $res->message);
+//        $this->assertEquals("Shipment added", $res->message);
 //    }
 
     public function test_update_shipment_should_give_valid_response() {
@@ -149,7 +153,8 @@ class DeliveryMatchClientTest extends TestCase
 
         $res = $api->updateShipment($shipment);
 
-        print_r($res);
+        print_r("test update shipment valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
         $this->assertEquals("success", $res->status);
         $this->assertEquals(200, $res->code);
         $this->assertEquals("Shipment successfully booked", $res->message);
@@ -188,15 +193,11 @@ class DeliveryMatchClientTest extends TestCase
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new UpdateShipmentMethodRequest(8784637, null, 'book', null,Action::BOOK);
 
-        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
-
         $this->expectException(DeliveryMatchException::class);
         $this->expectExceptionMessage("failure: Cannot update shipment method for booked shipment");
         $this->expectExceptionCode(39);
 
-        $res = $api->updateShipmentMethod($shipment);
-
-        print_r($res);
+        $api->updateShipmentMethod($shipment);
     }
 
     public function test_get_shipment_should_give_valid_response() {
@@ -223,17 +224,44 @@ class DeliveryMatchClientTest extends TestCase
         $this->expectExceptionCode(32);
 
         $res = $api->getShipment($shipment);
-        print_r($res);
+    }
+
+    public function test_get_shipments_should_give_valid_response() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $date = new DateTime('now');
+        $date = $date->modify('-10 days');
+        $shipment = new GetShipmentsRequest($date, new DateTime('now'), null, null);
+
+        $res = $api->getShipments($shipment);
+
+        print_r("test get shipment valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
+        $this->assertEquals("success", $res->status);
     }
 
     /**
      * @throws DeliveryMatchException
      */
+    public function test_get_shipments_should_throw_exception() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $date = new DateTime('now');
+        $date = $date->modify('-100 days');
+        $shipment = new GetShipmentsRequest($date, new DateTime('now'), null, null);
+
+        $this->expectException(DeliveryMatchException::class);
+        $this->expectExceptionMessage("failure: Date can not be more than 90 days in the past");
+        $this->expectExceptionCode(45);
+
+        $res = $api->getShipments($shipment);
+    }
+
     public function test_get_services_should_give_valid_response() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new GetServicesRequest("NL", "BE");
 
         $res = $api->getServices($shipment);
+        print_r("test get services valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
         $this->assertEquals("success", $res->status);
         $this->assertEquals(200, $res->code);
     }
@@ -257,7 +285,10 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetLabelRequest(8577049, "147147", null, null);
 
         $res = $api->getLabel($shipment);
-        print_r($res);
+
+        print_r("test get label valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
+
         $this->assertEquals("success", $res->status);
         $this->assertEquals(200, $res->code);
         $this->assertEquals("Shipment label(s) found", $res->message);
@@ -281,7 +312,8 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetLocationsRequest(8577049, "147147", "Wijnhaven 88", "Rotterdam", "NL");
 
         $res = $api->getLocations($shipment);
-        print_r($res);
+        print_r("test get locations valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
         $this->assertEquals("success", $res->status);
         $this->assertEquals(137, $res->code);
         $this->assertEquals("Locations retrieved", $res->message);
@@ -305,23 +337,13 @@ class DeliveryMatchClientTest extends TestCase
         $shipment = new GetDesignRequest('NL', null);
 
         $res = $api->getDesign($shipment);
-        print_r($res);
+        print_r("test get design valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
         $this->assertEquals("success", $res->status);
         $this->assertEquals(690, $res->code);
         $this->assertEquals("Successfully collected design", $res->message);
     }
 
-    //failure: Account not yet authorized to use this functionality
-//    public function test_get_user_activity_should_give_valid_response() {
-//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-//        $shipment = new GetUserActivityRequest(new DateTime('2022-04-08'), new DateTime('2022-05-18'));
-//
-//        $res = $api->getUserActivity($shipment);
-//        $this->assertEquals("success", $res->status);
-//        $this->assertEquals(790, $res->code);
-//        $this->assertEquals("Successfully collected user activity", $res->message);
-//    }
-//
     /**
      * @throws DeliveryMatchException
      */

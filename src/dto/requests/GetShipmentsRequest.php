@@ -9,7 +9,7 @@ class GetShipmentsRequest implements \JsonSerializable
 {
     protected DateTime $dateFrom;
     protected DateTime $dateTo;
-    protected ?string $status;
+    public ?string $status;
     protected ?string $channel;
 
     /**

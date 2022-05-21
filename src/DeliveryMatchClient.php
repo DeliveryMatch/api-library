@@ -17,6 +17,7 @@ use DeliveryMatchApiLibrary\dto\responses\GetLabelResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetLocationsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetServicesResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
@@ -104,7 +105,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetShipmentsRequest $getShipmentsRequest
-     * @return getShipmentsRequest
+     * @return GetShipmentsResponse
      * @throws DeliveryMatchException
      */
     public function getShipments(getShipmentsRequest $getShipmentsRequest)
@@ -197,10 +198,9 @@ class DeliveryMatchClient
 
         $result = json_decode($response);
 
-        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || ($method == "getShipment" && (!isset($result->status) || $result->status != "failure")) || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
+        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (($method == "getShipment" || $method == "getShipments") && (!isset($result->status) || $result->status != "failure")) || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
             $result->code = $http_code;
             $result->status = "success";
-            print_r($result);
             return $result;
         }
 
@@ -209,7 +209,6 @@ class DeliveryMatchClient
         }
 
         if ($method == "getShipments" && isset($result->status) && $result->status == NULL) {
-            var_dump($result);
             throw new DeliveryMatchException("Shipment could not be stored", 8, "failure");
         }
 

@@ -9,9 +9,9 @@ use DeliveryMatchApiLibrary\dto\general\response\PickupResponse;
 
 class UpdateShipmentResponse
 {
-    private string $status;
-    private int $code;
-    private string $message;
+    public string $status;
+    public int $code;
+    public string $message;
     private string $shipmentID;
     private Date $dateCreated;
     private Date $orderNumber;
