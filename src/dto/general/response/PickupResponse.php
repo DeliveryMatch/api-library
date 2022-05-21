@@ -4,7 +4,7 @@ namespace DeliveryMatchApiLibrary\dto\general\response;
 
 use Cassandra\Date;
 
-class Pickup
+class PickupResponse
 {
     public int $warehouse;
     public Date $pickupDate;

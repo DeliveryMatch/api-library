@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response;
 
-class Packages
+class UpdateShipmentPackagesResponse
 {
     public string $barcode;
     public string $ZPL;

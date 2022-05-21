@@ -4,7 +4,7 @@ namespace DeliveryMatchApiLibrary\dto\general\response;
 
 use Cassandra\Date;
 
-class Delivery
+class DeliveryResponse
 {
     public Date $deliveryDate;
     public string $timeFrom;
