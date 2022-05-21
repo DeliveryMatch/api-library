@@ -18,6 +18,7 @@ use DeliveryMatchApiLibrary\dto\responses\GetLocationsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetServicesResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
@@ -144,7 +145,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetUserActivityRequest $getUserActivityRequest
-     * @return GetUserActivityRequest
+     * @return GetUserActivityResponse
      * @throws DeliveryMatchException
      */
     public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
