@@ -15,6 +15,8 @@ use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
 use DeliveryMatchApiLibrary\dto\responses\GetLabelResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetLocationsResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
@@ -61,7 +63,7 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentsRequest $insertShipmentsRequest
-     * @return InsertShipmentsRequest
+     * @return InsertShipmentsResponse
      * @throws DeliveryMatchException
      */
     public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
@@ -91,7 +93,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetShipmentRequest $getShipmentRequest
-     * @return getShipmentRequest
+     * @return getShipmentResponse
      * @throws DeliveryMatchException
      */
     public function getShipment(getShipmentRequest $getShipmentRequest)
