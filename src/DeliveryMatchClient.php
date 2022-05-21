@@ -13,6 +13,7 @@ use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
+use DeliveryMatchApiLibrary\dto\responses\GetLabelResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
@@ -129,7 +130,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetLabelRequest $getLabelRequest
-     * @return GetLabelRequest
+     * @return GetLabelResponse
      * @throws DeliveryMatchException
      */
     public function getLabel(GetLabelRequest $getLabelRequest) {
