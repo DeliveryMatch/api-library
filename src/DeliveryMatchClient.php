@@ -15,6 +15,7 @@ use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
 use DeliveryMatchApiLibrary\dto\responses\GetLabelResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetLocationsResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetServicesResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
@@ -123,7 +124,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetServicesRequest $getServicesRequest
-     * @return GetServicesRequest
+     * @return GetServicesResponse
      * @throws DeliveryMatchException
      */
     public function getServices(GetServicesRequest $getServicesRequest)
