@@ -20,6 +20,7 @@ use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
+use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentMethodResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
@@ -86,7 +87,7 @@ class DeliveryMatchClient
 
     /**
      * @param UpdateShipmentMethodRequest $UpdateShipmentMethodRequest
-     * @return UpdateShipmentMethodRequest
+     * @return UpdateShipmentMethodResponse
      * @throws DeliveryMatchException
      */
     public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest)
