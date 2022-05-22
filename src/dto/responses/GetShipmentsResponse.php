@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\GetShipmentsShipmentsResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipments\GetShipmentsShipmentsResponse;
 
 class GetShipmentsResponse
 {

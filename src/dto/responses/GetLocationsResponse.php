@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\LocationDropoffMethodsResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getLocations\LocationDropoffMethodsResponse;
 
 class GetLocationsResponse
 {

@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\LabelPackagesResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getLabel\LabelPackagesResponse;
 
 class GetLabelResponse
 {

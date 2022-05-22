@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\InsertShipmentsShipmentResponse;
+use DeliveryMatchApiLibrary\dto\general\response\insertShipments\InsertShipmentsShipmentResponse;
 
 class InsertShipmentsResponse
 {
@@ -13,8 +13,8 @@ class InsertShipmentsResponse
     public int $totalSell; //int
     public array $lowestPricePerLocation;
     public bool $longestDeliverydate;
-    public array $options;  //array( undefined )
+    public array $options;
 
     /** @var InsertShipmentsShipmentResponse[] */
-    public array $shipments; //array( Shipments )
+    public array $shipments;
 }

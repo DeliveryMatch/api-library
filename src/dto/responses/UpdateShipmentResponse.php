@@ -3,9 +3,9 @@
 namespace DeliveryMatchApiLibrary\dto\responses;
 
 use Cassandra\Date;
-use DeliveryMatchApiLibrary\dto\general\response\DeliveryResponse;
-use DeliveryMatchApiLibrary\dto\general\response\UpdateShipmentPackagesResponse;
-use DeliveryMatchApiLibrary\dto\general\response\PickupResponse;
+use DeliveryMatchApiLibrary\dto\general\response\updateShipment\DeliveryResponse;
+use DeliveryMatchApiLibrary\dto\general\response\updateShipment\PickupResponse;
+use DeliveryMatchApiLibrary\dto\general\response\updateShipment\UpdateShipmentPackagesResponse;
 
 class UpdateShipmentResponse
 {

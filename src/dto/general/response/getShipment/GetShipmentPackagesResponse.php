@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto\general\response;
+namespace DeliveryMatchApiLibrary\dto\general\response\getShipment;
 
 class GetShipmentPackagesResponse
 {

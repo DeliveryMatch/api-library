@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto\general\response;
+namespace DeliveryMatchApiLibrary\dto\general\response\insertShipments;
 
 class InsertShipmentsShipmentResponse
 {
@@ -8,5 +8,5 @@ class InsertShipmentsShipmentResponse
     /** @var ItemsResponse[] */
     public array $items;
     public string $shipmentID;
-    public InsertsShipmentMethodResponse $shipmentMethods;
+    public InsertShipmentsMethodResponse $shipmentMethods;
 }

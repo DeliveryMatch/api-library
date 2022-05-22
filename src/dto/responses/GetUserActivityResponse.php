@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\UserActivitiesResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getUserActivity\UserActivitiesResponse;
 
 class GetUserActivityResponse
 {

@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\GetServicesServicesResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getServices\GetServicesServicesResponse;
 
 class GetServicesResponse
 {

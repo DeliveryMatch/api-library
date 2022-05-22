@@ -2,13 +2,13 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\ClientResponse;
-use DeliveryMatchApiLibrary\dto\general\response\CustomerResponse;
-use DeliveryMatchApiLibrary\dto\general\response\GetShipmentMethodResponse;
-use DeliveryMatchApiLibrary\dto\general\response\GetShipmentPackagesResponse;
-use DeliveryMatchApiLibrary\dto\general\response\GetShipmentQuoteResponse;
-use DeliveryMatchApiLibrary\dto\general\response\SenderResponse;
-use DeliveryMatchApiLibrary\dto\general\response\ShipmentResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\ClientResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\CustomerResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\GetShipmentMethodResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\GetShipmentPackagesResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\GetShipmentQuoteResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\SenderResponse;
+use DeliveryMatchApiLibrary\dto\general\response\getShipment\ShipmentResponse;
 
 class GetShipmentResponse
 {
