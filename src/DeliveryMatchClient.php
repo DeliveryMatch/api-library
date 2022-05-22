@@ -19,6 +19,8 @@ use DeliveryMatchApiLibrary\dto\responses\GetServicesResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentBookResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentShowAndSelectResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentMethodResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
@@ -58,7 +60,7 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return InsertShipmentRequest
+     * @return InsertShipmentShowAndSelectResponse|InsertShipmentBookResponse
      * @throws DeliveryMatchException
      */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
@@ -155,7 +157,7 @@ class DeliveryMatchClient
 
     /**
      * @param GetDesignRequest $getDesignRequest
-     * @return GetDesignRequest
+     * @return GetDesignResponse
      * @throws DeliveryMatchException
      */
     public function getDesign(GetDesignRequest $getDesignRequest) {
