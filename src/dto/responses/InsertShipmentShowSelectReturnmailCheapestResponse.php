@@ -2,8 +2,8 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturn\InsertDropoffMethodsResponse;
-use DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturn\InsertShipmentMethodResponse;
+use DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturnmailCheapestReturn\InsertDropoffMethodsResponse;
+use DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturnmailCheapestReturn\InsertShipmentMethodResponse;
 
 class InsertShipmentShowSelectReturnmailCheapestResponse
 {

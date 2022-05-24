@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturn;
+namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturnmailCheapestReturn;
 
 class InsertEarliestResponse
 {

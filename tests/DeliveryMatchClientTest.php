@@ -85,33 +85,33 @@ class DeliveryMatchClientTest extends TestCase
 //        }
 //    }
 
-    // Works, just commented to prevent spam inserts
-    public function test_insert_shipment_should_give_valid_response() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new InsertShipmentRequest(
-            new Client(1, "API", null, Action::CHEAPEST, null, null, null),
-            new Shipment("libraryTest123_cheapest", "libraryTest123_cheapest", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
-            null,
-            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "NL", null, null), null, null),
-            null, //new Packages([new Package(null, "test", null, 5, 10, 10, 10)]),
-            new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
-            )]),
-            null,
-            null,
-            29.98,
-            null,
-            15
-        );
-
-        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
-
-        $res = $api->insertShipment($shipment);
-        print_r("test insert shipment valid response: ");
-        print_r(json_encode($res, JSON_PRETTY_PRINT));
-        $this->assertEquals("success", $res->status);
-        $this->assertEquals(7, $res->code);
-        $this->assertEquals("Shipment successfully stored", $res->message);
-    }
+//    // Works, just commented to prevent spam inserts
+//    public function test_insert_shipment_should_give_valid_response() {
+//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+//        $shipment = new InsertShipmentRequest(
+//            new Client(1, "API", null, Action::CHEAPEST, null, null, null),
+//            new Shipment("libraryTest123_cheapest", "libraryTest123_cheapest", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
+//            null,
+//            new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "NL", null, null), null, null),
+//            null, //new Packages([new Package(null, "test", null, 5, 10, 10, 10)]),
+//            new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
+//            )]),
+//            null,
+//            null,
+//            29.98,
+//            null,
+//            15
+//        );
+//
+//        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
+//
+//        $res = $api->insertShipment($shipment);
+//        print_r("test insert shipment valid response: ");
+//        print_r(json_encode($res, JSON_PRETTY_PRINT));
+//        $this->assertEquals("success", $res->status);
+//        $this->assertEquals(7, $res->code);
+//        $this->assertEquals("Shipment successfully stored", $res->message);
+//    }
 //
 //    // Works as well, just commented to prevent spam inserts
 //    public function test_insert_shipmentS_should_give_valid_response() {
@@ -283,19 +283,19 @@ class DeliveryMatchClientTest extends TestCase
 //        $api->getServices($shipment);
 //    }
 //
-//    public function test_get_label_should_give_valid_response() {
-//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-//        $shipment = new GetLabelRequest(8577049, "147147", null, null);
-//
-//        $res = $api->getLabel($shipment);
-//
-//        print_r("test get label valid response: ");
-//        print_r(json_encode($res, JSON_PRETTY_PRINT));
-//
-//        $this->assertEquals("success", $res->status);
-//        $this->assertEquals(200, $res->code);
-//        $this->assertEquals("Shipment label(s) found", $res->message);
-//    }
+    public function test_get_label_should_give_valid_response() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new GetLabelRequest(8577049, "147147", null, null);
+
+        $res = $api->getLabel($shipment);
+
+        print_r("test get label valid response: ");
+        print_r(json_encode($res, JSON_PRETTY_PRINT));
+
+        $this->assertEquals("success", $res->status);
+        $this->assertEquals(200, $res->code);
+        $this->assertEquals("Shipment label(s) found", $res->message);
+    }
 //
 //    /**
 //     * @throws DeliveryMatchException
