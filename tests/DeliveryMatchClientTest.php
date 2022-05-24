@@ -6,6 +6,8 @@ use DeliveryMatchApiLibrary\dto\general\Address;
 use DeliveryMatchApiLibrary\dto\general\Client;
 use DeliveryMatchApiLibrary\dto\general\Customer;
 use DeliveryMatchApiLibrary\dto\general\Method;
+use DeliveryMatchApiLibrary\dto\general\Package;
+use DeliveryMatchApiLibrary\dto\general\Packages;
 use DeliveryMatchApiLibrary\dto\general\Product;
 use DeliveryMatchApiLibrary\dto\general\Quote;
 use DeliveryMatchApiLibrary\dto\general\Shipment;
@@ -87,11 +89,11 @@ class DeliveryMatchClientTest extends TestCase
     public function test_insert_shipment_should_give_valid_response() {
         $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
         $shipment = new InsertShipmentRequest(
-            new Client(1, "API", null, Action::SELECT, Method::FIRST, null, null),
-            new Shipment("libraryTest123_select", "libraryTest123_select", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
+            new Client(1, "API", null, Action::CHEAPEST, null, null, null),
+            new Shipment("libraryTest123_cheapest", "libraryTest123_cheapest", "NL", "EUR", null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,),
             null,
             new Customer(null, new Address("DM_Test", null, "Street 1A", null, "Street", "1", "A", "1234AB", "The Hague", "NL", null, null), null, null),
-            null,
+            null, //new Packages([new Package(null, "test", null, 5, 10, 10, 10)]),
             new Quote([new Product("123", null, null, null, null, "description", "some content", "123456789", null, null, 2, 14.99, 5, 20, 20, null, null, null, null, null, null, null, null,
             )]),
             null,
@@ -100,6 +102,8 @@ class DeliveryMatchClientTest extends TestCase
             null,
             15
         );
+
+        print_r(json_encode($shipment, JSON_PRETTY_PRINT));
 
         $res = $api->insertShipment($shipment);
         print_r("test insert shipment valid response: ");

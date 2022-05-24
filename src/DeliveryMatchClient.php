@@ -20,7 +20,7 @@ use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentBookResponse;
-use DeliveryMatchApiLibrary\dto\responses\InsertShipmentShowAndSelectResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentShowSelectReturnmailCheapestResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentMethodResponse;
 use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
@@ -60,7 +60,7 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return InsertShipmentShowAndSelectResponse|InsertShipmentBookResponse
+     * @return InsertShipmentShowSelectReturnmailCheapestResponse|InsertShipmentBookResponse
      * @throws DeliveryMatchException
      */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {

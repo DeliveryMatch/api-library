@@ -1,6 +1,6 @@
 <?php
 
-namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowAndSelect;
+namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturn;
 
 class InsertDropoffMethodsResponse
 {
