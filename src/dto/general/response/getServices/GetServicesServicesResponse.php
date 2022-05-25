@@ -4,13 +4,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\getServices;
 
 class GetServicesServicesResponse
 {
-    public string $id; //String
-    public string $carrier; //String
-    public string $carrierID; //String
-    public string $serviceID; //String
-    public string $service; //String
-    public string $description; //String
+    public string $id;
+    public string $carrier;
+    public string $carrierID;
+    public string $serviceID;
+    public string $service;
+    public string $description;
 
     /** @var GetServicesCountriesResponse[] */
-    public array $countries; //array( Countries )
+    public array $countries;
 }

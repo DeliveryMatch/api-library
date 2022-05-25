@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response\getShipments;
 
-use Cassandra\Date;
+use DateTime;
 
 class GetShipmentsShipmentsResponse
 {
@@ -12,7 +12,7 @@ class GetShipmentsShipmentsResponse
     public string $senderName;
     public string $receiverName;
     public string $zipcode;
-    public string $dateAdded;
+    public DateTime $dateAdded;
     public string $channel;
     public string $country;
     public string $status;

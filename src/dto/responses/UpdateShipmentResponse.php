@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\responses;
 
-use Cassandra\Date;
+use DateTime;
 use DeliveryMatchApiLibrary\dto\general\response\updateShipment\DeliveryResponse;
 use DeliveryMatchApiLibrary\dto\general\response\updateShipment\PickupResponse;
 use DeliveryMatchApiLibrary\dto\general\response\updateShipment\UpdateShipmentPackagesResponse;
@@ -13,7 +13,7 @@ class UpdateShipmentResponse
     public int $code;
     public string $message;
     private string $shipmentID;
-    private string $dateCreated;
+    private DateTime $dateCreated;
     private string $orderNumber;
     private string $reference;
     private string $postcode;

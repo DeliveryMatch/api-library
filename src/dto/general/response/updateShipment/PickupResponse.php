@@ -2,10 +2,10 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response\updateShipment;
 
-use Cassandra\Date;
+use DateTime;
 
 class PickupResponse
 {
     public int $warehouse;
-    public string $pickupDate;
+    public DateTime $pickupDate;
 }

@@ -2,13 +2,13 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response\updateShipment;
 
-use Cassandra\Date;
+use DateTime;
 
 class DeliveryResponse
 {
-    public string $deliveryDate;
-    public string $timeFrom;
-    public string $timeTo;
+    public DateTime $deliveryDate;
+    public DateTime $timeFrom;
+    public DateTime $timeTo;
     public string $carrier;
     public string $serviceLevel;
     public string $barcode;

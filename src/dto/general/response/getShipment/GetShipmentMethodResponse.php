@@ -2,7 +2,7 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response\getShipment;
 
-use Cassandra\Date;
+use DateTime;
 
 class GetShipmentMethodResponse
 {
@@ -10,10 +10,10 @@ class GetShipmentMethodResponse
     public array $tariffID;
     public string $carrierName;
     public string $serviceLevel;
-    public string $datePickup;
-    public string $dateDelivery;
+    public DateTime $datePickup;
+    public DateTime $dateDelivery;
     public string $buy_price;
     public string $sell_price;
-    public string $timeFrom;
-    public string $timeTo;
+    public DateTime $timeFrom;
+    public DateTime $timeTo;
 }

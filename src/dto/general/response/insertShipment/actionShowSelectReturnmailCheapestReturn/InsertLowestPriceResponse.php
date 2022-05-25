@@ -2,6 +2,8 @@
 
 namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShowSelectReturnmailCheapestReturn;
 
+use DateTime;
+
 class InsertLowestPriceResponse
 {
     public string $methodID;
@@ -13,10 +15,10 @@ class InsertLowestPriceResponse
     public float $buy_price;
     public string $description;
     public string $currency;
-    public string $dateDelivery;
-    public string $datePickup;
-    public string $timeFrom;
-    public string $timeTo;
+    public DateTime $dateDelivery;
+    public DateTime $datePickup;
+    public DateTime $timeFrom;
+    public DateTime $timeTo;
     public string $title;
     public string $checkID;
 
