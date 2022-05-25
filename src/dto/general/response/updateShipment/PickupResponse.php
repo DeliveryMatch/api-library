@@ -7,5 +7,5 @@ use Cassandra\Date;
 class PickupResponse
 {
     public int $warehouse;
-    public Date $pickupDate;
+    public string $pickupDate;
 }

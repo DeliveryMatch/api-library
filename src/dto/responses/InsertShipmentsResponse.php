@@ -6,11 +6,11 @@ use DeliveryMatchApiLibrary\dto\general\response\insertShipments\InsertShipments
 
 class InsertShipmentsResponse
 {
-    public string $status; //String
-    public int $code; //int
-    public string $message; //String
-    public int $totalBuy; //int
-    public int $totalSell; //int
+    public string $status;
+    public int $code;
+    public string $message;
+    public int $totalBuy;
+    public int $totalSell;
     public array $lowestPricePerLocation;
     public bool $longestDeliverydate;
     public array $options;

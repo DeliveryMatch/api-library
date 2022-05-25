@@ -6,12 +6,12 @@ use Cassandra\Date;
 
 class GetShipmentMethodResponse
 {
-    public Date $configurationID;
+    public string $configurationID;
     public array $tariffID;
     public string $carrierName;
     public string $serviceLevel;
-    public Date $datePickup;
-    public Date $dateDelivery;
+    public string $datePickup;
+    public string $dateDelivery;
     public string $buy_price;
     public string $sell_price;
     public string $timeFrom;

@@ -203,17 +203,17 @@ class DeliveryMatchClientTest extends TestCase
 //        $api->updateShipmentMethod($shipment);
 //    }
 //
-//    public function test_get_shipment_should_give_valid_response() {
-//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-//        $shipment = new GetShipmentRequest(8577049, '147147');
-//
-//        $res = $api->getShipment($shipment);
-//
-//        print_r("test get shipment valid response: ");
-//        print_r(json_encode($res, JSON_PRETTY_PRINT));
-//        $this->assertEquals(200, $res->code);
-//        $this->assertEquals("success", $res->status);
-//    }
+    public function test_get_shipment_should_give_valid_response() {
+        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+        $shipment = new GetShipmentRequest(8577049, '147147');
+
+        $res = $api->getShipment($shipment);
+
+        print_r("test get shipment valid response: ");
+        var_dump($res);
+        $this->assertEquals(200, $res->code);
+        $this->assertEquals("success", $res->status);
+    }
 //
 //    /**
 //     * @throws DeliveryMatchException
@@ -283,19 +283,19 @@ class DeliveryMatchClientTest extends TestCase
 //        $api->getServices($shipment);
 //    }
 //
-    public function test_get_label_should_give_valid_response() {
-        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
-        $shipment = new GetLabelRequest(8577049, "147147", null, null);
-
-        $res = $api->getLabel($shipment);
-
-        print_r("test get label valid response: ");
-        print_r(json_encode($res, JSON_PRETTY_PRINT));
-
-        $this->assertEquals("success", $res->status);
-        $this->assertEquals(200, $res->code);
-        $this->assertEquals("Shipment label(s) found", $res->message);
-    }
+//    public function test_get_label_should_give_valid_response() {
+//        $api = new DeliveryMatchClient($_SERVER["CLIENT_ID"], $_SERVER["API_KEY"], $_SERVER["URL"]);
+//        $shipment = new GetLabelRequest(8577049, "147147", null, null);
+//
+//        $res = $api->getLabel($shipment);
+//
+//        print_r("test get label valid response: ");
+//        print_r(json_encode($res, JSON_PRETTY_PRINT));
+//
+//        $this->assertEquals("success", $res->status);
+//        $this->assertEquals(200, $res->code);
+//        $this->assertEquals("Shipment label(s) found", $res->message);
+//    }
 //
 //    /**
 //     * @throws DeliveryMatchException

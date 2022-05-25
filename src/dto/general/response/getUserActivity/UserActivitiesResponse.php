@@ -6,7 +6,7 @@ use DateTime;
 
 class UserActivitiesResponse
 {
-    public DateTime $date;
+    public string $date;
     public UserActivitiesResponse $shipment;
     public string $username ;
     public string $action ;

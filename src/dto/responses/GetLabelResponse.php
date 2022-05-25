@@ -16,5 +16,5 @@ class GetLabelResponse
     public string $ZPL;
 
     /** @var LabelPackagesResponse[] */
-    public $packages; //array( Packages )
+    public $packages;
 }

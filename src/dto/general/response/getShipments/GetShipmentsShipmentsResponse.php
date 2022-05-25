@@ -12,11 +12,12 @@ class GetShipmentsShipmentsResponse
     public string $senderName;
     public string $receiverName;
     public string $zipcode;
-    public Date $dateAdded;
+    public string $dateAdded;
     public string $channel;
     public string $country;
     public string $status;
     public string $carrierName;
     public string $serviceLevel;
+    /** @var string[] */
     public array $barcodes;
 }

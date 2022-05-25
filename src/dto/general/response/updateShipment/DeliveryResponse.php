@@ -6,7 +6,7 @@ use Cassandra\Date;
 
 class DeliveryResponse
 {
-    public Date $deliveryDate;
+    public string $deliveryDate;
     public string $timeFrom;
     public string $timeTo;
     public string $carrier;

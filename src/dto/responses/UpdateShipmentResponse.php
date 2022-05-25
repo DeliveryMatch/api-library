@@ -13,8 +13,8 @@ class UpdateShipmentResponse
     public int $code;
     public string $message;
     private string $shipmentID;
-    private Date $dateCreated;
-    private Date $orderNumber;
+    private string $dateCreated;
+    private string $orderNumber;
     private string $reference;
     private string $postcode;
     private PickupResponse $pickup;
@@ -24,5 +24,5 @@ class UpdateShipmentResponse
     private string $ZPL;
 
     /** @var UpdateShipmentPackagesResponse[] */
-    private array $packages; //array( UpdateShipmentPackagesResponse )
+    private array $packages;
 }
