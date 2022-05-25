@@ -8,7 +8,7 @@ class SenderAddressResponse
 {
     public string $name;
     public string$companyName;
-    public Date $address1;
+    public string $address1;
     public string $address2;
     public string $postcode;
     public string $city;

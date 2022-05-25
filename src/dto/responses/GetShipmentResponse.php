@@ -17,6 +17,8 @@ class GetShipmentResponse
     public GetShipmentMethodResponse $shipmentMethod;
     public CustomerResponse $customer;
     public SenderResponse $sender;
+
+    /** @var string[] */
     public array $barcodes;
     public GetShipmentPackagesResponse $packages;
     public GetShipmentQuoteResponse $quote;
