@@ -2,6 +2,7 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DateTime;
 use DeliveryMatchApiLibrary\dto\requests\GetDesignRequest;
 use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
@@ -21,6 +22,7 @@ use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
 use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentBookResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentPrintResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentSaveResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentShowSelectReturnmailCheapestResponse;
 use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
@@ -62,10 +64,11 @@ class DeliveryMatchClient
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return InsertShipmentShowSelectReturnmailCheapestResponse|InsertShipmentBookResponse|InsertShipmentSaveResponse
+     * @return InsertShipmentShowSelectReturnmailCheapestResponse|InsertShipmentBookResponse|InsertShipmentSaveResponse|InsertShipmentPrintResponse
      * @throws DeliveryMatchException
      */
-    public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
+    public function insertShipment(InsertShipmentRequest $insertShipmentRequest)
+    {
         return $this->connectApi("insertShipment", $insertShipmentRequest);
     }
 
@@ -74,7 +77,7 @@ class DeliveryMatchClient
      * @return InsertShipmentsResponse
      * @throws DeliveryMatchException
      */
-    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
+    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest): InsertShipmentsResponse
     {
         return $this->connectApi("insertShipments", $insertShipmentsRequest);
     }
@@ -84,7 +87,7 @@ class DeliveryMatchClient
      * @return UpdateShipmentResponse
      * @throws DeliveryMatchException
      */
-    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest)
+    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest): UpdateShipmentResponse
     {
         return $this->connectApi("updateShipment", $updateShipmentRequest);
     }
@@ -94,7 +97,7 @@ class DeliveryMatchClient
      * @return UpdateShipmentMethodResponse
      * @throws DeliveryMatchException
      */
-    public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest)
+    public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest): UpdateShipmentMethodResponse
     {
         return $this->connectApi("updateShipmentMethod", $UpdateShipmentMethodRequest);
     }
@@ -114,9 +117,9 @@ class DeliveryMatchClient
      * @return GetShipmentsResponse
      * @throws DeliveryMatchException
      */
-    public function getShipments(getShipmentsRequest $getShipmentsRequest)
+    public function getShipments(getShipmentsRequest $getShipmentsRequest): GetShipmentsResponse
     {
-        return $this->connectApi("getShipments", $getShipmentsRequest);
+        return $this->stringToDateTime($this->connectApi("getShipments", $getShipmentsRequest));
     }
 
     /**
@@ -124,7 +127,7 @@ class DeliveryMatchClient
      * @return GetLocationsResponse
      * @throws DeliveryMatchException
      */
-    public function getLocations(GetLocationsRequest $getLocationsRequest)
+    public function getLocations(GetLocationsRequest $getLocationsRequest): GetLocationsResponse
     {
         return $this->connectApi("getLocations", $getLocationsRequest);
     }
@@ -134,7 +137,7 @@ class DeliveryMatchClient
      * @return GetServicesResponse
      * @throws DeliveryMatchException
      */
-    public function getServices(GetServicesRequest $getServicesRequest)
+    public function getServices(GetServicesRequest $getServicesRequest): GetServicesResponse
     {
         return $this->connectApi("getServices", $getServicesRequest);
     }
@@ -144,7 +147,8 @@ class DeliveryMatchClient
      * @return GetLabelResponse
      * @throws DeliveryMatchException
      */
-    public function getLabel(GetLabelRequest $getLabelRequest) {
+    public function getLabel(GetLabelRequest $getLabelRequest): GetLabelResponse
+    {
         return $this->connectApi("getLabel", $getLabelRequest);
     }
 
@@ -153,7 +157,8 @@ class DeliveryMatchClient
      * @return GetUserActivityResponse
      * @throws DeliveryMatchException
      */
-    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
+    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest): GetUserActivityResponse
+    {
         return $this->connectApi("getUserActivity", $getUserActivityRequest);
     }
 
@@ -162,8 +167,31 @@ class DeliveryMatchClient
      * @return GetDesignResponse
      * @throws DeliveryMatchException
      */
-    public function getDesign(GetDesignRequest $getDesignRequest) {
+    public function getDesign(GetDesignRequest $getDesignRequest): GetDesignResponse
+    {
         return $this->connectApi("getDesign", $getDesignRequest);
+    }
+
+    public function stringToDateTime($result) {
+        // stdClass converting to array
+        $result = json_decode(json_encode($result), true);
+        foreach($result as $key => &$value)
+        {
+            if (!is_array($value))
+            {
+                if(strpos($key, 'date')) {
+                    $value = DateTime::createFromFormat("Y-m-d", $value);
+                }
+                if(strpos($key, 'time')) {
+                    $value = DateTime::createFromFormat("H:i", $value);
+                }
+
+            } else {
+                $this->stringToDateTime($value);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -201,6 +229,8 @@ class DeliveryMatchClient
         if (!$response) {
             throw new Exception(curl_error($ch), curl_errno($ch));
         }
+
+        print_r($response);
 
         $result = json_decode($response);
 
