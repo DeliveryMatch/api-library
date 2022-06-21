@@ -31,6 +31,7 @@ use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
+
 use function PHPUnit\Framework\isEmpty;
 
 class DeliveryMatchClient
@@ -104,12 +105,12 @@ class DeliveryMatchClient
 
     /**
      * @param GetShipmentRequest $getShipmentRequest
-     * @return getShipmentResponse
+     * @return GetShipmentResponse
      * @throws DeliveryMatchException
      */
-    public function getShipment(getShipmentRequest $getShipmentRequest)
+    public function getShipment(getShipmentRequest $getShipmentRequest): GetShipmentResponse
     {
-        return $this->connectApi("getShipment", $getShipmentRequest);
+        return $this->stringToDateTime($this->connectApi("getShipment", $getShipmentRequest));
     }
 
     /**
@@ -193,6 +194,24 @@ class DeliveryMatchClient
 
         return $result;
     }
+
+//    private function assignProperty($properties, $classObj) {
+//        $reader = new AnnotationReader();
+//        $propertyAccessor = PropertyAccess::createPropertyAccessor();
+//        foreach ($properties as $key => $property) {
+//            $propertyAnnotation = $reader->getPropertyAnnotation($property, DataMapper::class);
+//            $json_field = $propertyAnnotation->json_field;
+//            if(!$json_field) continue;
+//            $value = $result[$json_field];
+//            $propertyAccessor->setValue(
+//                $classObj,
+//                $property->getName(),
+//                $value
+//            );
+//        }
+//
+//        return
+//    }
 
     /**
      * @param string $method
