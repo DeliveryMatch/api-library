@@ -60,7 +60,7 @@ class DeliveryMatchClient
      * @throws DeliveryMatchException
      */
     public function sendRequest(string $method, $data) {
-        return $this->connectApi($method, $data);
+        return $this->stringToDateTime($this->connectApi($method, $data));
     }
 
     /**
@@ -70,7 +70,7 @@ class DeliveryMatchClient
      */
     public function insertShipment(InsertShipmentRequest $insertShipmentRequest)
     {
-        return $this->connectApi("insertShipment", $insertShipmentRequest);
+        return $this->stringToDateTime($this->connectApi("insertShipment", $insertShipmentRequest));
     }
 
     /**
@@ -80,7 +80,7 @@ class DeliveryMatchClient
      */
     public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest): InsertShipmentsResponse
     {
-        return $this->connectApi("insertShipments", $insertShipmentsRequest);
+        return $this->stringToDateTime($this->connectApi("insertShipments", $insertShipmentsRequest));
     }
 
     /**
@@ -90,7 +90,7 @@ class DeliveryMatchClient
      */
     public function updateShipment(UpdateShipmentRequest $updateShipmentRequest): UpdateShipmentResponse
     {
-        return $this->connectApi("updateShipment", $updateShipmentRequest);
+        return $this->stringToDateTime($this->connectApi("updateShipment", $updateShipmentRequest));
     }
 
     /**
@@ -100,7 +100,7 @@ class DeliveryMatchClient
      */
     public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest): UpdateShipmentMethodResponse
     {
-        return $this->connectApi("updateShipmentMethod", $UpdateShipmentMethodRequest);
+        return $this->stringToDateTime($this->connectApi("updateShipmentMethod", $UpdateShipmentMethodRequest));
     }
 
     /**
@@ -130,7 +130,7 @@ class DeliveryMatchClient
      */
     public function getLocations(GetLocationsRequest $getLocationsRequest): GetLocationsResponse
     {
-        return $this->connectApi("getLocations", $getLocationsRequest);
+        return $this->stringToDateTime($this->connectApi("getLocations", $getLocationsRequest));
     }
 
     /**
@@ -140,7 +140,7 @@ class DeliveryMatchClient
      */
     public function getServices(GetServicesRequest $getServicesRequest): GetServicesResponse
     {
-        return $this->connectApi("getServices", $getServicesRequest);
+        return $this->stringToDateTime($this->connectApi("getServices", $getServicesRequest));
     }
 
     /**
@@ -150,7 +150,7 @@ class DeliveryMatchClient
      */
     public function getLabel(GetLabelRequest $getLabelRequest): GetLabelResponse
     {
-        return $this->connectApi("getLabel", $getLabelRequest);
+        return $this->stringToDateTime($this->connectApi("getLabel", $getLabelRequest));
     }
 
     /**
@@ -160,7 +160,7 @@ class DeliveryMatchClient
      */
     public function getUserActivity(GetUserActivityRequest $getUserActivityRequest): GetUserActivityResponse
     {
-        return $this->connectApi("getUserActivity", $getUserActivityRequest);
+        return $this->stringToDateTime($this->connectApi("getUserActivity", $getUserActivityRequest));
     }
 
     /**
@@ -170,7 +170,7 @@ class DeliveryMatchClient
      */
     public function getDesign(GetDesignRequest $getDesignRequest): GetDesignResponse
     {
-        return $this->connectApi("getDesign", $getDesignRequest);
+        return $this->stringToDateTime($this->connectApi("getDesign", $getDesignRequest));
     }
 
     public function stringToDateTime($result) {
@@ -192,7 +192,7 @@ class DeliveryMatchClient
             }
         }
 
-        return $result;
+        return json_decode(json_encode($result));
     }
 
     /**
