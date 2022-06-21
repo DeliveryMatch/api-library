@@ -4,5 +4,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShow
 
 class InsertAllResponse
 {
-    public array $all;
+    private array $all;
+
+    /**
+     * @return array
+     */
+    public function getAll(): array
+    {
+        return $this->all;
+    }
 }

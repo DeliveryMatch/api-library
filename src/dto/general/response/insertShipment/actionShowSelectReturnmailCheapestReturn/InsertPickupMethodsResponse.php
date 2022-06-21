@@ -5,5 +5,14 @@ namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShow
 class InsertPickupMethodsResponse
 {
     /** @var InsertAllResponse[] */
-    public array $all;
+    private array $all;
+
+    /**
+     * @return InsertAllResponse[]
+     */
+    public function getAll(): array
+    {
+        return $this->all;
+    }
+
 }

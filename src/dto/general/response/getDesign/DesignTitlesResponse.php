@@ -5,5 +5,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\getDesign;
 class DesignTitlesResponse
 {
     /** @var DesignTitleOptions[] */
-    public array $all;
+    private array $all;
+
+    /**
+     * @return DesignTitleOptions[]
+     */
+    public function getAll(): array
+    {
+        return $this->all;
+    }
 }

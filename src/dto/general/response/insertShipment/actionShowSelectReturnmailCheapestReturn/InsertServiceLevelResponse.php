@@ -4,6 +4,22 @@ namespace DeliveryMatchApiLibrary\dto\general\response\insertShipment\actionShow
 
 class InsertServiceLevelResponse
 {
-    public string $name;
-    public string $description;
+    private string $name;
+    private string $description;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 }

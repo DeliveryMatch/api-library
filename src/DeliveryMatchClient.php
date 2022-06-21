@@ -195,24 +195,6 @@ class DeliveryMatchClient
         return $result;
     }
 
-//    private function assignProperty($properties, $classObj) {
-//        $reader = new AnnotationReader();
-//        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-//        foreach ($properties as $key => $property) {
-//            $propertyAnnotation = $reader->getPropertyAnnotation($property, DataMapper::class);
-//            $json_field = $propertyAnnotation->json_field;
-//            if(!$json_field) continue;
-//            $value = $result[$json_field];
-//            $propertyAccessor->setValue(
-//                $classObj,
-//                $property->getName(),
-//                $value
-//            );
-//        }
-//
-//        return
-//    }
-
     /**
      * @param string $method
      *

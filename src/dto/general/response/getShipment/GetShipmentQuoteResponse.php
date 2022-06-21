@@ -5,5 +5,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\getShipment;
 class GetShipmentQuoteResponse
 {
     /** @var GetShipmentProductResponse[]  */
-    public array $product;
+    private array $product;
+
+    /**
+     * @return GetShipmentProductResponse[]
+     */
+    public function getProduct(): array
+    {
+        return $this->product;
+    }
 }

@@ -4,5 +4,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\insertShipments;
 
 class InsertShipmentsMethodResponse
 {
-    public LowestPriceResponse $lowestPrice;
+    private LowestPriceResponse $lowestPrice;
+
+    /**
+     * @return LowestPriceResponse
+     */
+    public function getLowestPrice(): LowestPriceResponse
+    {
+        return $this->lowestPrice;
+    }
 }

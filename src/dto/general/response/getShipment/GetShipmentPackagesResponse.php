@@ -5,5 +5,13 @@ namespace DeliveryMatchApiLibrary\dto\general\response\getShipment;
 class GetShipmentPackagesResponse
 {
     /** @var GetShipmentPackageResponse[]  */
-    public array $package;
+    private array $package;
+
+    /**
+     * @return GetShipmentPackageResponse[]
+     */
+    public function getPackage(): array
+    {
+        return $this->package;
+    }
 }
