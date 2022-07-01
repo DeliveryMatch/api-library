@@ -2,6 +2,7 @@
 
 namespace DeliveryMatchApiLibrary;
 
+use DateTime;
 use DeliveryMatchApiLibrary\dto\requests\GetDesignRequest;
 use DeliveryMatchApiLibrary\dto\requests\getLabelRequest;
 use DeliveryMatchApiLibrary\dto\requests\GetLocationsRequest;
@@ -12,10 +13,25 @@ use DeliveryMatchApiLibrary\dto\requests\GetUserActivityRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentRequest;
 use DeliveryMatchApiLibrary\dto\requests\InsertShipmentsRequest;
 use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentRequest;
-use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentsRequest;
+use DeliveryMatchApiLibrary\dto\requests\UpdateShipmentMethodRequest;
+use DeliveryMatchApiLibrary\dto\responses\GetDesignResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetLabelResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetLocationsResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetServicesResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetShipmentResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetShipmentsResponse;
+use DeliveryMatchApiLibrary\dto\responses\GetUserActivityResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentBookResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentPrintResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentSaveResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentShowSelectReturnmailCheapestResponse;
+use DeliveryMatchApiLibrary\dto\responses\InsertShipmentsResponse;
+use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentMethodResponse;
+use DeliveryMatchApiLibrary\dto\responses\UpdateShipmentResponse;
 use DeliveryMatchApiLibrary\exceptions\DeliveryMatchException;
 use DeliveryMatchApiLibrary\exceptions\InvalidDeliveryMatchLinkException;
 use Exception;
+
 use function PHPUnit\Framework\isEmpty;
 
 class DeliveryMatchClient
@@ -44,113 +60,139 @@ class DeliveryMatchClient
      * @throws DeliveryMatchException
      */
     public function sendRequest(string $method, $data) {
-        return $this->connectApi($method, $data);
+        return $this->stringToDateTime($this->connectApi($method, $data));
     }
 
     /**
      * @param InsertShipmentRequest $insertShipmentRequest
-     * @return mixed|string
+     * @return InsertShipmentShowSelectReturnmailCheapestResponse|InsertShipmentBookResponse|InsertShipmentSaveResponse|InsertShipmentPrintResponse
      * @throws DeliveryMatchException
      */
-    public function insertShipment(InsertShipmentRequest $insertShipmentRequest) {
-        return $this->connectApi("insertShipment", $insertShipmentRequest);
+    public function insertShipment(InsertShipmentRequest $insertShipmentRequest)
+    {
+        return $this->stringToDateTime($this->connectApi("insertShipment", $insertShipmentRequest));
     }
 
     /**
      * @param InsertShipmentsRequest $insertShipmentsRequest
-     * @return mixed|string
+     * @return InsertShipmentsResponse
      * @throws DeliveryMatchException
      */
-    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest)
+    public function insertShipments(InsertShipmentsRequest $insertShipmentsRequest): InsertShipmentsResponse
     {
-        return $this->connectApi("insertShipments", $insertShipmentsRequest);
+        return $this->stringToDateTime($this->connectApi("insertShipments", $insertShipmentsRequest));
     }
 
     /**
      * @param UpdateShipmentRequest $updateShipmentRequest
-     * @return mixed|string
+     * @return UpdateShipmentResponse
      * @throws DeliveryMatchException
      */
-    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest)
+    public function updateShipment(UpdateShipmentRequest $updateShipmentRequest): UpdateShipmentResponse
     {
-        return $this->connectApi("updateShipment", $updateShipmentRequest);
+        return $this->stringToDateTime($this->connectApi("updateShipment", $updateShipmentRequest));
     }
 
     /**
-     * @param UpdateShipmentsRequest $updateShipmentsRequest
-     * @return mixed|string
+     * @param UpdateShipmentMethodRequest $UpdateShipmentMethodRequest
+     * @return UpdateShipmentMethodResponse
      * @throws DeliveryMatchException
      */
-    public function updateShipments(UpdateShipmentsRequest $updateShipmentsRequest)
+    public function updateShipmentMethod(UpdateShipmentMethodRequest $UpdateShipmentMethodRequest): UpdateShipmentMethodResponse
     {
-        return $this->connectApi("updateShipments", $updateShipmentsRequest);
+        return $this->stringToDateTime($this->connectApi("updateShipmentMethod", $UpdateShipmentMethodRequest));
     }
 
     /**
      * @param GetShipmentRequest $getShipmentRequest
-     * @return mixed|string
+     * @return GetShipmentResponse
      * @throws DeliveryMatchException
      */
-    public function getShipment(getShipmentRequest $getShipmentRequest)
+    public function getShipment(getShipmentRequest $getShipmentRequest): GetShipmentResponse
     {
-        return $this->connectApi("getShipment", $getShipmentRequest);
+        return $this->stringToDateTime($this->connectApi("getShipment", $getShipmentRequest));
     }
 
     /**
      * @param GetShipmentsRequest $getShipmentsRequest
-     * @return mixed|string
+     * @return GetShipmentsResponse
      * @throws DeliveryMatchException
      */
-    public function getShipments(getShipmentsRequest $getShipmentsRequest)
+    public function getShipments(getShipmentsRequest $getShipmentsRequest): GetShipmentsResponse
     {
-        return $this->connectApi("getShipments", $getShipmentsRequest);
+        return $this->stringToDateTime($this->connectApi("getShipments", $getShipmentsRequest));
     }
 
     /**
      * @param GetLocationsRequest $getLocationsRequest
-     * @return mixed|string
+     * @return GetLocationsResponse
      * @throws DeliveryMatchException
      */
-    public function getLocations(GetLocationsRequest $getLocationsRequest)
+    public function getLocations(GetLocationsRequest $getLocationsRequest): GetLocationsResponse
     {
-        return $this->connectApi("getLocations", $getLocationsRequest);
+        return $this->stringToDateTime($this->connectApi("getLocations", $getLocationsRequest));
     }
 
     /**
      * @param GetServicesRequest $getServicesRequest
-     * @return mixed|string
+     * @return GetServicesResponse
      * @throws DeliveryMatchException
      */
-    public function getServices(GetServicesRequest $getServicesRequest)
+    public function getServices(GetServicesRequest $getServicesRequest): GetServicesResponse
     {
-        return $this->connectApi("getServices", $getServicesRequest);
+        return $this->stringToDateTime($this->connectApi("getServices", $getServicesRequest));
     }
 
     /**
      * @param GetLabelRequest $getLabelRequest
-     * @return mixed|string
+     * @return GetLabelResponse
      * @throws DeliveryMatchException
      */
-    public function getLabel(GetLabelRequest $getLabelRequest) {
-        return $this->connectApi("getLabel", $getLabelRequest);
+    public function getLabel(GetLabelRequest $getLabelRequest): GetLabelResponse
+    {
+        return $this->stringToDateTime($this->connectApi("getLabel", $getLabelRequest));
     }
 
     /**
      * @param GetUserActivityRequest $getUserActivityRequest
-     * @return mixed|string
+     * @return GetUserActivityResponse
      * @throws DeliveryMatchException
      */
-    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest) {
-        return $this->connectApi("getUserActivity", $getUserActivityRequest);
+    public function getUserActivity(GetUserActivityRequest $getUserActivityRequest): GetUserActivityResponse
+    {
+        return $this->stringToDateTime($this->connectApi("getUserActivity", $getUserActivityRequest));
     }
 
     /**
      * @param GetDesignRequest $getDesignRequest
-     * @return mixed|string
+     * @return GetDesignResponse
      * @throws DeliveryMatchException
      */
-    public function getDesign(GetDesignRequest $getDesignRequest) {
-        return $this->connectApi("getDesign", $getDesignRequest);
+    public function getDesign(GetDesignRequest $getDesignRequest): GetDesignResponse
+    {
+        return $this->stringToDateTime($this->connectApi("getDesign", $getDesignRequest));
+    }
+
+    public function stringToDateTime($result) {
+        // stdClass converting to array
+        $result = json_decode(json_encode($result), true);
+        foreach($result as $key => &$value)
+        {
+            if (!is_array($value))
+            {
+                if(strpos($key, 'date')) {
+                    $value = DateTime::createFromFormat("Y-m-d", $value);
+                }
+                if(strpos($key, 'time')) {
+                    $value = DateTime::createFromFormat("H:i", $value);
+                }
+
+            } else {
+                $this->stringToDateTime($value);
+            }
+        }
+
+        return json_decode(json_encode($result));
     }
 
     /**
@@ -189,23 +231,14 @@ class DeliveryMatchClient
             throw new Exception(curl_error($ch), curl_errno($ch));
         }
 
+        print_r($response);
+
         $result = json_decode($response);
 
-        print_r($result);
-
-//        if(!isset($result->status) && $http_code == "200" && (isset($result->shipments) || isset($result->services))) {
-//            $result->code = $http_code;
-//            $result->status = "success";
-//        }
-
-        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
+        if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (($method == "getShipment" || $method == "getShipments") && (!isset($result->status) || $result->status != "failure")) || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
             $result->code = $http_code;
             $result->status = "success";
             return $result;
-//            print_r($method);
-
-//            print_r("after change:");
-//            print_r($result);
         }
 
         if (isset($result->status) && $result->status !== "success") {
@@ -213,7 +246,6 @@ class DeliveryMatchClient
         }
 
         if ($method == "getShipments" && isset($result->status) && $result->status == NULL) {
-            var_dump($result);
             throw new DeliveryMatchException("Shipment could not be stored", 8, "failure");
         }
 

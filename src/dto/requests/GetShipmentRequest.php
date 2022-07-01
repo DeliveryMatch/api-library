@@ -2,8 +2,6 @@
 
 namespace DeliveryMatchApiLibrary\dto\requests;
 
-use JetBrains\PhpStorm\Internal;
-
 class GetShipmentRequest implements \JsonSerializable
 {
     protected int $id;
@@ -35,7 +33,8 @@ class GetShipmentRequest implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return
-            [ "shipment" =>
+            [
+                "shipment" =>
                 [
                 'id'   => $this->getId(),
                 'orderNumber' => $this->getorderNumber()
