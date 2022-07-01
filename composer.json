@@ -11,8 +11,7 @@
     ],
     "require": {
         "ext-curl": "*",
-        "ext-json": "*",
-      "ext-cassandra": "*"
+        "ext-json": "*"
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
