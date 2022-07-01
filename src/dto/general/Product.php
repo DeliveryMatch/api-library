@@ -20,6 +20,7 @@ class Product implements \JsonSerializable
     protected float $weight;
     protected float $length;
     protected float $width;
+    protected float $height;
     protected ?bool $stock;
     protected ?DateTime $stockdate;
     protected ?WareHouse $warehouses;
@@ -45,6 +46,7 @@ class Product implements \JsonSerializable
      * @param float $weight
      * @param float $length
      * @param float $width
+     * @param float $height
      * @param bool|null $stock
      * @param DateTime|null $stockdate
      * @param WareHouse|null $warehouses
@@ -54,7 +56,7 @@ class Product implements \JsonSerializable
      * @param string|null $custom4
      * @param string|null $custom5
      */
-    public function __construct(?string $id, ?int $packageNum, ?int $warehouse, ?bool $transportlabel, ?string $location, ?string $description, ?string $content, ?string $SKU, ?string $hsCode, ?DangerousGoods $dangerousGoods, float $quantity, float $value, float $weight, float $length, float $width, ?bool $stock, ?DateTime $stockdate, ?WareHouse $warehouses, ?string $custom1, ?string $custom2, ?string $custom3, ?string $custom4, ?string $custom5)
+    public function __construct(?string $id, ?int $packageNum, ?int $warehouse, ?bool $transportlabel, ?string $location, ?string $description, ?string $content, ?string $SKU, ?string $hsCode, ?DangerousGoods $dangerousGoods, float $quantity, float $value, float $weight, float $length, float $width, float $height, ?bool $stock, ?DateTime $stockdate, ?WareHouse $warehouses, ?string $custom1, ?string $custom2, ?string $custom3, ?string $custom4, ?string $custom5)
     {
         $this->id = $id;
         $this->packageNum = $packageNum;
@@ -71,6 +73,7 @@ class Product implements \JsonSerializable
         $this->weight = $weight;
         $this->length = $length;
         $this->width = $width;
+        $this->height = $height;
         $this->stock = $stock;
         $this->stockdate = $stockdate;
         $this->warehouses = $warehouses;
@@ -166,6 +169,12 @@ class Product implements \JsonSerializable
     }
 
     /** @return float */
+    public function getHeight(): float
+    {
+        return $this->height;
+    }
+
+    /** @return float */
     public function getWidth(): float
     {
         return $this->width;
@@ -238,6 +247,7 @@ class Product implements \JsonSerializable
             'weight' => $this->getWeight(),
             'length' => $this->getLength(),
             'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
             'stock' => $this->getStock(),
             'stockdate' => is_null($this->getStockdate()) ? $this->getStockdate() : $this->getStockdate()->format('Y-m-d'),
             'warehouses' => $this->getWarehouses(),
