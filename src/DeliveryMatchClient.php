@@ -231,8 +231,6 @@ class DeliveryMatchClient
             throw new Exception(curl_error($ch), curl_errno($ch));
         }
 
-        print_r($response);
-
         $result = json_decode($response);
 
         if((isset($result->status) && strpos($result->status, "booked")) || strpos($method, "insertShipment") || (($method == "getShipment" || $method == "getShipments") && (!isset($result->status) || $result->status != "failure")) || (isset($result->shipments) && !isEmpty($result->shipments)) || isset($result->services) || isset($result->labelURL)) {
