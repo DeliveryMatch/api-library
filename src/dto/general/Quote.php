@@ -19,6 +19,18 @@ class Quote implements \JsonSerializable
         return $this->product;
     }
 
+    public function getTotalWeight(): float {
+        $totalWeight = 0.0;
+        foreach ($this->product as $product) $totalWeight += $product->getWeight();
+        return $totalWeight;
+    }
+
+    public function getTotalValue(): float {
+        $totalValue = 0.0;
+        foreach ($this->product as $product) $totalValue += $product->getValue();
+        return $totalValue;
+    }
+
     /** @return array */
     public function jsonSerialize(): array
     {
