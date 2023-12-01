@@ -56,7 +56,7 @@ class Shipment implements \JsonSerializable
      * @param string|null $printerchannel
      * @param string|null $getdiscounts
      */
-    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?DateTime $firstPickUpDate, ?DateTime $firstPickUpDateTime, ?string $carrier, ?string $service, ?DateTime $deliveryTimeFrom, ?DateTime $deliveryTimeTo, ?bool $inbound, ?int $numPallets, ?bool $cod, ?bool $signature, ?bool $noNeighbor, ?bool $insured, ?string $incoterm, ?string $route, ?string $warehousezone, ?string $batch, ?string $note, ?string $instructions, ?string $printerchannel, ?string $getdiscounts)
+    public function __construct(string $orderNumber, string $reference, string $language, string $currency, ?DateTime $firstPickUpDate = null, ?DateTime $firstPickUpDateTime = null, ?string $carrier = null, ?string $service = null, ?DateTime $deliveryTimeFrom = null, ?DateTime $deliveryTimeTo = null, ?bool $inbound = null, ?int $numPallets = null, ?bool $cod = null, ?bool $signature = null, ?bool $noNeighbor = null, ?bool $insured = null, ?string $incoterm = null, ?string $route = null, ?string $warehousezone = null, ?string $batch = null, ?string $note = null, ?string $instructions = null, ?string $printerchannel = null, ?string $getdiscounts = null)
     {
         $this->orderNumber = $orderNumber;
         $this->reference = $reference;

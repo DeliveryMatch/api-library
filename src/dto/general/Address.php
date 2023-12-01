@@ -8,8 +8,8 @@ class Address implements \JsonSerializable
     protected ?string $companyName;
     protected string $address1;
     protected ?string $address2;
-    protected string $street;
-    protected string $houseNr;
+    protected ?string $street;
+    protected ?string $houseNr;
     protected ?string $houseNrExt;
     protected string $postcode;
     protected string $city;
@@ -22,8 +22,8 @@ class Address implements \JsonSerializable
      * @param string|null $companyName
      * @param string $address1
      * @param string|null $address2
-     * @param string $street
-     * @param string $houseNr
+     * @param string|null $street
+     * @param string|null $houseNr
      * @param string|null $houseNrExt
      * @param string $postcode
      * @param string $city
@@ -31,7 +31,7 @@ class Address implements \JsonSerializable
      * @param string|null $state
      * @param string|null $zone
      */
-    public function __construct(string $name, ?string $companyName, string $address1, ?string $address2, string $street, string $houseNr, ?string $houseNrExt, string $postcode, string $city, string $country, ?string $state, ?string $zone)
+    public function __construct(string $name, ?string $companyName = null, string $address1, ?string $address2 = null, ?string $street, ?string $houseNr, ?string $houseNrExt = null, string $postcode, string $city, string $country, ?string $state = null, ?string $zone = null)
     {
         $this->name = $name;
         $this->companyName = $companyName;

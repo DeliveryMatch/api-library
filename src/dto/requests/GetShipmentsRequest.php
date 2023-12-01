@@ -18,7 +18,7 @@ class GetShipmentsRequest implements \JsonSerializable
      * @param string|null $status
      * @param string|null $channel
      */
-    public function __construct(DateTime $dateFrom, DateTime $dateTo, ?string $status, ?string $channel)
+    public function __construct(DateTime $dateFrom, DateTime $dateTo, ?string $status = null, ?string $channel = null)
     {
         $this->dateFrom = $dateFrom;
         $this->dateTo = $dateTo;

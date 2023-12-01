@@ -21,7 +21,7 @@ class Client implements \JsonSerializable
      * @param bool|null $filter
      * @param bool|null $transportlabel
      */
-    public function __construct(int $id, ?string $channel, ?string $callback, string $action, ?string $method, ?bool $filter, ?bool $transportlabel)
+    public function __construct(int $id, ?string $channel = null, ?string $callback = null, string $action, ?string $method = null, ?bool $filter = null, ?bool $transportlabel = null)
     {
         $this->id = $id;
         $this->channel = $channel;

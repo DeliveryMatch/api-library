@@ -21,7 +21,7 @@ class ShipmentUpdate implements \JsonSerializable
      * @param int|null $labelSequence
      * @param bool|null $endOfShipment
      */
-    public function __construct(int $id, ?string $status, ?string $orderNumber, ?string $reference, ?string $note, ?int $labelSequence, ?bool $endOfShipment)
+    public function __construct(int $id, ?string $status = null, ?string $orderNumber = null, ?string $reference = null, ?string $note = null, ?int $labelSequence = null, ?bool $endOfShipment = null)
     {
         $this->id = $id;
         $this->status = $status;

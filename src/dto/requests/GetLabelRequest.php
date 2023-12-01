@@ -15,7 +15,7 @@ class GetLabelRequest implements \JsonSerializable
      * @param int|null $sequence
      * @param bool|null $endOfShipment
      */
-    public function __construct(?int $id, ?string $orderNumber, ?int $sequence, ?bool $endOfShipment)
+    public function __construct(?int $id = null, ?string $orderNumber = null, ?int $sequence = null, ?bool $endOfShipment = null)
     {
         $this->id = $id;
         $this->orderNumber = $orderNumber;

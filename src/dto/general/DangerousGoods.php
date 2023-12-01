@@ -47,7 +47,7 @@ class DangerousGoods implements \JsonSerializable
      * @param string|null $labels
      * @param int|null $transportCategory
      */
-    public function __construct(?string $technicalName, ?string $shippingName, ?string $mainDanger, ?string $class, ?string $subclass, ?string $packingGroup, ?int $UN, ?int $UNP, ?float $grossMass, ?float $netMass, ?string $massUnit, ?bool $LQ, ?string $NOS, ?bool $environmentHazard, ?string $tunnelCode, ?string $classifactionCode, ?string $packingType, ?string $properties, ?string $labels, ?int $transportCategory)
+    public function __construct(?string $technicalName = null, ?string $shippingName = null, ?string $mainDanger = null, ?string $class = null, ?string $subclass = null, ?string $packingGroup = null, ?int $UN = null, ?int $UNP = null, ?float $grossMass = null, ?float $netMass = null, ?string $massUnit = null, ?bool $LQ = null, ?string $NOS = null, ?bool $environmentHazard = null, ?string $tunnelCode = null, ?string $classifactionCode = null, ?string $packingType = null, ?string $properties = null, ?string $labels = null, ?int $transportCategory = null)
     {
         $this->technicalName = $technicalName;
         $this->shippingName = $shippingName;
