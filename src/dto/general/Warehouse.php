@@ -12,7 +12,7 @@ class Warehouse implements \JsonSerializable
      * @param int|null $id
      * @param DateTime|null $stockdate
      */
-    public function __construct(?int $id, ?DateTime $stockdate)
+    public function __construct(?int $id = null, ?DateTime $stockdate = null)
     {
         $this->id = $id;
         $this->stockdate = $stockdate;

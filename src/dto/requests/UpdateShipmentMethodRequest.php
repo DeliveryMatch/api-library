@@ -18,7 +18,7 @@ class UpdateShipmentMethodRequest implements \JsonSerializable {
      * @param DateTime|null $date
      * @param string|null $action
      */
-    public function __construct(int $id, ?string $orderNumber, string $methodId, ?DateTime $date, ?string $action)
+    public function __construct(int $id, ?string $orderNumber = null, string $methodId, ?DateTime $date = null, ?string $action = null)
     {
         $this->id = $id;
         $this->orderNumber = $orderNumber;

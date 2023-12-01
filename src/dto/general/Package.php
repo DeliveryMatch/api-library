@@ -21,7 +21,7 @@ class Package implements \JsonSerializable
      * @param float $width
      * @param float $height
      */
-    public function __construct(?string $warehouse, string $description, ?string $type, float $weight, float $length, float $width, float $height)
+    public function __construct(?string $warehouse = null, string $description, ?string $type = null, float $weight, float $length, float $width, float $height)
     {
         $this->warehouse = $warehouse;
         $this->description = $description;

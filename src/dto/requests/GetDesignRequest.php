@@ -11,7 +11,7 @@ class GetDesignRequest implements \JsonSerializable
      * @param string|null $language
      * @param bool|null $logo
      */
-    public function __construct(?string $language, ?bool $logo)
+    public function __construct(?string $language = null, ?bool $logo = null)
     {
         $this->language = $language;
         $this->logo = $logo;

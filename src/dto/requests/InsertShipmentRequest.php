@@ -36,7 +36,7 @@ class InsertShipmentRequest implements \JsonSerializable
      * @param float|null $priceExcl
      * @param float|null $weight
      */
-    public function __construct(Client $client, Shipment $shipment, ?Sender $sender, ?Customer $customer, ?Packages $packages, ?Quote $quote, ?bool $fragileGoods, ?bool $dangerousGoods, ?float $priceIncl, ?float $priceExcl, ?float $weight)
+    public function __construct(Client $client, Shipment $shipment, ?Sender $sender = null, ?Customer $customer = null, ?Packages $packages = null, ?Quote $quote = null, ?bool $fragileGoods = null, ?bool $dangerousGoods = null, ?float $priceIncl = null, ?float $priceExcl = null, ?float $weight = null)
     {
         $this->client = $client;
         $this->shipment = $shipment;

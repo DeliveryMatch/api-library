@@ -15,7 +15,7 @@ class Customer implements \JsonSerializable
      * @param Address|null $billing
      * @param Contact|null $contact
      */
-    public function __construct(?string $id, Address $address, ?Address $billing, ?Contact $contact)
+    public function __construct(?string $id = null, Address $address, ?Address $billing = null, ?Contact $contact = null)
     {
         $this->id = $id;
         $this->address = $address;
