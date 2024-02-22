@@ -137,4 +137,13 @@ class UpdateShipmentRequest implements \JsonSerializable
             'weight' => $this->getWeight(),
         ];
     }
+
+    /**
+     * @param UpdateShipmentRequest $otherRequest
+     * @return bool
+     */
+    public function isDifferentThan(UpdateShipmentRequest $otherRequest): bool
+    {
+        return (json_encode($this->jsonSerialize()) != json_encode($otherRequest->jsonSerialize()));
+    }
 }
