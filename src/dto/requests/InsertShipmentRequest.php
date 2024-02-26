@@ -135,4 +135,13 @@ class InsertShipmentRequest implements \JsonSerializable
             'weight' => $this->getWeight(),
         ];
     }
+
+    /**
+     * @param InsertShipmentsRequest $otherRequest
+     * @return bool
+     */
+    public function isDifferentThan(InsertShipmentsRequest $otherRequest): bool
+    {
+        return (json_encode($this->jsonSerialize()) != json_encode($otherRequest->jsonSerialize()));
+    }
 }
