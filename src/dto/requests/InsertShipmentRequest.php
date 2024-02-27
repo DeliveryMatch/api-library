@@ -137,10 +137,10 @@ class InsertShipmentRequest implements \JsonSerializable
     }
 
     /**
-     * @param InsertShipmentsRequest $otherRequest
+     * @param InsertShipmentRequest $otherRequest
      * @return bool
      */
-    public function isDifferentThan(InsertShipmentsRequest $otherRequest): bool
+    public function isDifferentThan(InsertShipmentRequest $otherRequest): bool
     {
         return (json_encode($this->jsonSerialize()) != json_encode($otherRequest->jsonSerialize()));
     }
