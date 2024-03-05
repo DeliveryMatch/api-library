@@ -29,6 +29,8 @@ class Product implements \JsonSerializable
     protected ?string $custom3;
     protected ?string $custom4;
     protected ?string $custom5;
+    protected ?string $EAN;
+    protected ?string $countryOfOrigin;
 
     /**
      * @param string|null $id
@@ -56,7 +58,7 @@ class Product implements \JsonSerializable
      * @param string|null $custom4
      * @param string|null $custom5
      */
-    public function __construct(?string $id = null, ?int $packageNum = null, ?int $warehouse = null, ?bool $transportlabel = null, ?string $location = null, ?string $description = null, ?string $content = null, ?string $SKU = null, ?string $hsCode = null, ?DangerousGoods $dangerousGoods = null, float $quantity, float $value, float $weight, float $length, float $width, float $height, ?bool $stock = null, ?DateTime $stockdate = null, ?WareHouse $warehouses = null, ?string $custom1 = null, ?string $custom2 = null, ?string $custom3 = null, ?string $custom4 = null, ?string $custom5 = null)
+    public function __construct(?string $id = null, ?int $packageNum = null, ?int $warehouse = null, ?bool $transportlabel = null, ?string $location = null, ?string $description = null, ?string $content = null, ?string $SKU = null, ?string $hsCode = null, ?DangerousGoods $dangerousGoods = null, float $quantity, float $value, float $weight, float $length, float $width, float $height, ?bool $stock = null, ?DateTime $stockdate = null, ?WareHouse $warehouses = null, ?string $custom1 = null, ?string $custom2 = null, ?string $custom3 = null, ?string $custom4 = null, ?string $custom5 = null, ?string $EAN = null, ?string $countryOfOrigin = null)
     {
         $this->id = $id;
         $this->packageNum = $packageNum;
@@ -82,6 +84,8 @@ class Product implements \JsonSerializable
         $this->custom3 = $custom3;
         $this->custom4 = $custom4;
         $this->custom5 = $custom5;
+        $this->EAN = $EAN;
+        $this->countryOfOrigin = $countryOfOrigin;
     }
 
     /** @return string|null */
@@ -228,6 +232,18 @@ class Product implements \JsonSerializable
         return $this->custom5;
     }
 
+    /** @return string|null */
+    public function getEAN(): ?string
+    {
+        return $this->ean;
+    }
+
+    /** @return string|null */
+    public function getCountryOfOrigin(): ?string
+    {
+        return $this->countryOfOrigin;
+    }
+
     /** @return array */
     public function jsonSerialize(): array
     {
@@ -240,6 +256,7 @@ class Product implements \JsonSerializable
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
             'SKU' => $this->getSKU(),
+            'EAN' => $this->getEAN(),
             'hsCode' => $this->getHsCode(),
             'dangerousGoods' => $this->getDangerousGoods(),
             'quantity' => $this->getQuantity(),
@@ -250,6 +267,7 @@ class Product implements \JsonSerializable
             'height' => $this->getHeight(),
             'stock' => $this->getStock(),
             'stockdate' => is_null($this->getStockdate()) ? $this->getStockdate() : $this->getStockdate()->format('Y-m-d'),
+            'countryOfOrigin' => $this->getCountryOfOrigin(),
             'warehouses' => $this->getWarehouses(),
             'custom1' => $this->getCustom1(),
             'custom2' => $this->getCustom2(),
