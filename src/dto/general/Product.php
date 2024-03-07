@@ -57,6 +57,8 @@ class Product implements \JsonSerializable
      * @param string|null $custom3
      * @param string|null $custom4
      * @param string|null $custom5
+     * @param string|null $EAN
+     * @param string|null $countryOfOrigin
      */
     public function __construct(?string $id = null, ?int $packageNum = null, ?int $warehouse = null, ?bool $transportlabel = null, ?string $location = null, ?string $description = null, ?string $content = null, ?string $SKU = null, ?string $hsCode = null, ?DangerousGoods $dangerousGoods = null, float $quantity, float $value, float $weight, float $length, float $width, float $height, ?bool $stock = null, ?DateTime $stockdate = null, ?WareHouse $warehouses = null, ?string $custom1 = null, ?string $custom2 = null, ?string $custom3 = null, ?string $custom4 = null, ?string $custom5 = null, ?string $EAN = null, ?string $countryOfOrigin = null)
     {
@@ -235,7 +237,7 @@ class Product implements \JsonSerializable
     /** @return string|null */
     public function getEAN(): ?string
     {
-        return $this->ean;
+        return $this->EAN;
     }
 
     /** @return string|null */
