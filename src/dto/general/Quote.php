@@ -21,13 +21,13 @@ class Quote implements \JsonSerializable
 
     public function getTotalWeight(): float {
         $totalWeight = 0.0;
-        foreach ($this->product as $product) $totalWeight += $product->getWeight();
+        foreach ($this->product as $product) $totalWeight += $product->getWeight() * $product->getQuantity();
         return $totalWeight;
     }
 
     public function getTotalValue(): float {
         $totalValue = 0.0;
-        foreach ($this->product as $product) $totalValue += $product->getValue();
+        foreach ($this->product as $product) $totalValue += $product->getValue() * $product->getQuantity();
         return $totalValue;
     }
 
