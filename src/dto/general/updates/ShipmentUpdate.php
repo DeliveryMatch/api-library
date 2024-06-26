@@ -11,7 +11,6 @@ class ShipmentUpdate implements \JsonSerializable
     protected ?string $note;
     protected ?int $labelSequence;
     protected ?bool $endOfShipment;
-    protected ?string $codeShipment;
 
     /**
      * @param int $id
@@ -21,9 +20,8 @@ class ShipmentUpdate implements \JsonSerializable
      * @param string|null $note
      * @param int|null $labelSequence
      * @param bool|null $endOfShipment
-     * @param string|null $codeShipment
      */
-    public function __construct(int $id, ?string $status = null, ?string $orderNumber = null, ?string $reference = null, ?string $note = null, ?int $labelSequence = null, ?bool $endOfShipment = null, ?string $codeShipment = null)
+    public function __construct(int $id, ?string $status = null, ?string $orderNumber = null, ?string $reference = null, ?string $note = null, ?int $labelSequence = null, ?bool $endOfShipment = null)
     {
         $this->id = $id;
         $this->status = $status;
@@ -32,7 +30,6 @@ class ShipmentUpdate implements \JsonSerializable
         $this->note = $note;
         $this->labelSequence = $labelSequence;
         $this->endOfShipment = $endOfShipment;
-        $this->codeShipment = $codeShipment;
     }
 
     /** @return int */
@@ -77,11 +74,6 @@ class ShipmentUpdate implements \JsonSerializable
         return $this->endOfShipment;
     }
 
-    public function getCodeShipment(): ?string
-    {
-        return $this->codeShipment;
-    }
-
     /** @return array */
     public function jsonSerialize(): array
     {
@@ -93,7 +85,6 @@ class ShipmentUpdate implements \JsonSerializable
             'note' => $this->getNote(),
             'labelSequence' => $this->getLabelSequence(),
             'endOfShipment' => $this->getEndOfShipment(),
-            'codeShipment' => $this->getCodeShipment()
         ];
     }
 
